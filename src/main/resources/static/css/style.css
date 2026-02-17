@@ -1,10 +1,16 @@
+.title {
+    background-color: #202020;
+}
+
 .sidebar {
     background-color: #202020; 
     min-height: 100vh;
+    
 }
 .main-content {
     background-color: #282828;
     color: white;
+    min-height: 100vh;
 }
 .nav-link {
     color: white;
@@ -13,7 +19,9 @@
     background-color: #e8e8e8;
     border-radius: 8px;
 }
-
+.me-8 {
+    margin-right: 100px;
+}
 .album-art {
     transition: transform 0.2s;
 }
@@ -24,4 +32,47 @@
     color: #0d6efd !important; 
     background-color: rgba(13, 110, 253, 0.1);  
     border-radius: 8px;
+}
+
+/* スマホ用の設定 */
+@media (max-width: 767px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 60px;
+        min-height: unset;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 12px;
+        z-index: 1030;
+        border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .sidebar nav {
+        width: 100%;
+    }
+    .sidebar .nav {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin: 0;
+    }
+    .sidebar .nav li {
+        list-style: none;
+        flex: 1 1 1;
+        min-width: 0;
+    }
+    .sidebar .nav .nav-link {
+        padding: 6px 10px;
+        margin: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+    }
 }

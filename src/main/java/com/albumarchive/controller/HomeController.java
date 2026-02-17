@@ -33,4 +33,11 @@ public class HomeController {
 		model.addAttribute("activeTab", "library");
 		return "library";
 	}
+
+	//管理画面表示
+	@GetMapping("/AlbumArchive/management")
+	public String showManagement(Model model) {
+		model.addAttribute("activeTab", "management");
+		return "management";
+	}
 }

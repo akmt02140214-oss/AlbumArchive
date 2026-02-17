@@ -8,22 +8,41 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-	<div class="container-fluid">
-		<div class="row">
-			<!--	サイドバー-->
-			<div class="col-md-2 sidebar text-white">
-				<h5 class="px-3 pt-4">Album Archive</h5>
-				
-					<nav>
-						<ul class="nav flex-column fw-bold">
-							<li><a th:href="@{/AlbumArchive}" class="nav-link mx-3 mt-3" th:classappend="${activeTab == 'home' ? 'active-tab' : ''}"><i class="bi bi-house-door-fill me-2"></i>Home</a></li>
-							<li><a th:href="@{/AlbumArchive/library}" class="nav-link mx-3 mt-2" th:classappend="${activeTab == 'library' ? 'active-tab' : ''}"><i class="bi bi-music-note-list me-2"></i>Library</a></li>
-						</ul>
-					</nav>
-					
+    <!-- サイドバー -->
+    <div class="container-fluid">
+        <div class="row">
+			<div class="d-md-none title">
+				<h5 class="text-white px-3 pt-4 pb-3">Album Archive</h5>
 			</div>
+            <div class="col-md-2 sidebar order-2 order-md-1 flex-row text-white">
+				<h5 class="d-none d-md-block px-3 pt-4">Album Archive</h5>
+                <nav>
+                    <ul class="nav flex-row flex-md-column fw-bold">
+                        <li class="nav-item flex-fill">
+                            <a th:href="@{/AlbumArchive}" class="nav-link d-flex flex-column flex-md-row mt-2" 
+                               th:classappend="${activeTab == 'home' ? 'active-tab' : ''}">
+                               <i class="bi bi-house-door-fill me-md-2"></i>Home
+                            </a>
+                        </li>
+                        <li class="nav-item flex-fill">
+                            <a th:href="@{/AlbumArchive/library}" class="nav-link d-flex flex-column flex-md-row mt-2" 
+                               th:classappend="${activeTab == 'library' ? 'active-tab' : ''}">
+                               <i class="bi bi-music-note-list me-md-2"></i>Library
+                            </a>
+                        </li>
+                        <li class="nav-item flex-fill">
+                            <a th:href="@{/AlbumArchive/management}" class="nav-link d-flex flex-column flex-md-row mt-2" 
+                               th:classappend="${activeTab == 'management' ? 'active-tab' : ''}">
+                               <i class="bi bi-grid-1x2-fill me-md-2"></i>Management
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
 			<!--メインコンテンツ-->
-			<div class="col-md-10 main-content text-white">
+			<div class="col-md-10 main-content order-1 order-md-2 text-white">
+				<h1 class="pt-4 ps-4 text-white">Home</h1>
 			</div>
 		</div>
 	</div>
