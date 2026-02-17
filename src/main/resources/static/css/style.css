@@ -1,0 +1,27 @@
+.sidebar {
+    background-color: #202020; 
+    min-height: 100vh;
+}
+.main-content {
+    background-color: #282828;
+    color: white;
+}
+.nav-link {
+    color: white;
+}
+.nav-link:hover {
+    background-color: #e8e8e8;
+    border-radius: 8px;
+}
+
+.album-art {
+    transition: transform 0.2s;
+}
+.album-art:hover {
+    transform: scale(1.02); 
+}
+.active-tab {
+    color: #0d6efd !important; 
+    background-color: rgba(13, 110, 253, 0.1);  
+    border-radius: 8px;
+}
