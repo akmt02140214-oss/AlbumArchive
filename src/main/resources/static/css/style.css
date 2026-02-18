@@ -22,6 +22,9 @@
 .me-8 {
     margin-right: 100px;
 }
+.searchbar {
+    border-radius: 16px;
+}
 .album-art {
     transition: transform 0.2s;
 }

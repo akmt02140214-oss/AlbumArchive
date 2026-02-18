@@ -31,12 +31,17 @@
                             </a>
                         </li>
                         <li class="nav-item flex-fill">
-                            <a th:href="@{/AlbumArchive/management}" class="nav-link d-flex flex-column flex-md-row mt-2" 
-                               th:classappend="${activeTab == 'management' ? 'active-tab' : ''}">
-                               <i class="bi bi-grid-1x2-fill me-md-2"></i>Management
+                            <a th:href="@{/AlbumArchive/add}" class="nav-link d-flex flex-column flex-md-row mt-2" 
+                               th:classappend="${activeTab == 'add' ? 'active-tab' : ''}">
+                               <i class="bi bi-plus-square me-md-2"></i>Add
                             </a>
                         </li>
-
+                        <li class="nav-item flex-fill">
+                            <a th:href="@{/AlbumArchive/edit}" class="nav-link d-flex flex-column flex-md-row mt-2" 
+                               th:classappend="${activeTab == 'edit' ? 'active-tab' : ''}">
+                               <i class="bi bi-pencil-square me-md-2"></i>Edit
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

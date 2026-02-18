@@ -9,7 +9,7 @@ public class Album {
 	
 	private String albumName;
 	private String artistName;
-	private String artworkUrl;
+	private String imageUrl;
 	private LocalDateTime registerDate;
 	
 

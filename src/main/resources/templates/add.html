@@ -42,12 +42,41 @@
                                <i class="bi bi-pencil-square me-md-2"></i>Edit
                             </a>
                         </li>
+
                     </ul>
                 </nav>
             </div>
+
 			<!--メインコンテンツ-->
 			<div class="col-md-10 main-content order-1 order-md-2 text-white">
-				<h1 class="pt-4 ps-4 text-white">Home</h1>
+                <div class="d-flex gap=5 align-items-center ps-4 pt-4">
+				    <h1 class="text-white">Add</h1>
+                        <form th:action="@{/AlbumArchive/add/search}" method="GET" class="flex-grow-1 d-flex justify-content-end me-5">
+                            <div class="position-relative w-50 me-5">
+                                <button class="btn position-absolute bg-transparent" type="submit"><i class="bi bi-search"></i></button>
+                                <input type="search" name="query" class="form-control searchbar ps-5" placeholder="Search albums...">
+                            </div>
+                        </form> 
+                </div>
+
+                <div th:if="${albums != null}" class="container-fluid mt-4">
+                    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4 px-4">
+                        <div class="col" th:each="album : ${albums}">
+                            <div class="card h-100 bg-dark border-secondary text-white shadow">
+
+                                <img th:src="${album.imageUrl != null ? album.imageUrl : 'https://placehold.jp/24/333333/ffffff/200x200.png?text=No+Image'}"
+                                     class="card-img-top p-2 rounded"
+                                     alt="Album Jacket"
+                                     style="aspect-ratio: 1 / 1; object-fit: cover;">
+                                <div class="card-body p-2 text-center">
+                                    <h6 class="card-title text-truncate mb-1" th:text="${album.albumName}">Album Name</h6>
+                                    <p class="card-text small text-secondary text-truncate" th:text="${album.artistName}">Artist Name</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
 			</div>
 		</div>
 	</div>
