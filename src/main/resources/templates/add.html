@@ -8,7 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <!-- サイドバー -->
+    <!-- サイドバー PC表示時は左側、モバイルでは下部に表示-->
     <div class="container-fluid">
         <div class="row">
 			<div class="d-md-none title">
@@ -17,6 +17,7 @@
             <div class="col-md-2 sidebar order-2 order-md-1 flex-row text-white">
 				<h5 class="d-none d-md-block px-3 pt-4">Album Archive</h5>
                 <nav>
+                    <!-- Homeリンク -->
                     <ul class="nav flex-row flex-md-column fw-bold">
                         <li class="nav-item flex-fill">
                             <a th:href="@{/AlbumArchive}" class="nav-link d-flex flex-column flex-md-row mt-2" 
@@ -24,18 +25,24 @@
                                <i class="bi bi-house-door-fill me-md-2"></i>Home
                             </a>
                         </li>
+
+                        <!-- Libraryリンク -->
                         <li class="nav-item flex-fill">
                             <a th:href="@{/AlbumArchive/library}" class="nav-link d-flex flex-column flex-md-row mt-2" 
                                th:classappend="${activeTab == 'library' ? 'active-tab' : ''}">
                                <i class="bi bi-music-note-list me-md-2"></i>Library
                             </a>
                         </li>
+
+                        <!-- Addリンク -->
                         <li class="nav-item flex-fill">
                             <a th:href="@{/AlbumArchive/add}" class="nav-link d-flex flex-column flex-md-row mt-2" 
                                th:classappend="${activeTab == 'add' ? 'active-tab' : ''}">
                                <i class="bi bi-plus-square me-md-2"></i>Add
                             </a>
                         </li>
+
+                        <!-- Editリンク -->
                         <li class="nav-item flex-fill">
                             <a th:href="@{/AlbumArchive/edit}" class="nav-link d-flex flex-column flex-md-row mt-2" 
                                th:classappend="${activeTab == 'edit' ? 'active-tab' : ''}">
@@ -49,8 +56,10 @@
 
 			<!--メインコンテンツ-->
 			<div class="col-md-10 main-content order-1 order-md-2 text-white">
-                <div class="d-flex gap=5 align-items-center ps-4 pt-4">
+                <div class="d-flex align-items-center ps-4 pt-4">
 				    <h1 class="text-white">Add</h1>
+
+                        <!-- アルバム検索フォーム -->
                         <form th:action="@{/AlbumArchive/add/search}" method="GET" class="flex-grow-1 d-flex justify-content-end me-5">
                             <div class="position-relative w-50 me-5">
                                 <button class="btn position-absolute bg-transparent" type="submit"><i class="bi bi-search"></i></button>
@@ -59,15 +68,20 @@
                         </form> 
                 </div>
 
+                <!-- アルバム一覧表示エリア -->
+                 <!-- モバイル2列、PC5列 -->
                 <div th:if="${albums != null}" class="container-fluid mt-4">
                     <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4 px-4">
+                        <!-- アルバムカード（繰り返し）-->
                         <div class="col" th:each="album : ${albums}">
                             <div class="card h-100 bg-dark border-secondary text-white shadow">
-
+                                <!-- アルバムジャケット画像 -->
                                 <img th:src="${album.imageUrl != null ? album.imageUrl : 'https://placehold.jp/24/333333/ffffff/200x200.png?text=No+Image'}"
                                      class="card-img-top p-2 rounded"
                                      alt="Album Jacket"
                                      style="aspect-ratio: 1 / 1; object-fit: cover;">
+
+                                <!-- アルバム情報     -->
                                 <div class="card-body p-2 text-center">
                                     <h6 class="card-title text-truncate mb-1" th:text="${album.albumName}">Album Name</h6>
                                     <p class="card-text small text-secondary text-truncate" th:text="${album.artistName}">Artist Name</p>
