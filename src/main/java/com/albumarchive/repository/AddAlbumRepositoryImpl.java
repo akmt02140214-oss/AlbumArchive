@@ -9,7 +9,7 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.albumarchive.dto.AlbumDto;
-import com.albumarchive.dto.LastFmResponse;
+import com.albumarchive.dto.TopAlbumResponse;
 import com.albumarchive.entity.Album;
 
 import lombok.RequiredArgsConstructor;
@@ -40,10 +40,10 @@ public class AddAlbumRepositoryImpl implements AddAlbumRepository {
 
             //Last.fm APIはたくさんのデータを取得してくるため、一度そのデータをDTOで受ける
             //Getリクエスト送信とDTOへのマッピング
-            LastFmResponse response = restClient.get()
+            TopAlbumResponse response = restClient.get()
                 .uri(url)
                 .retrieve()
-                .body(LastFmResponse.class);
+                .body(TopAlbumResponse.class);
 
         //APIからのデータを全て受け取るDTOからAlbumDtoで使用するデータだけを受ける
         List<AlbumDto> dtoList = response.getTopalbums().getAlbum();

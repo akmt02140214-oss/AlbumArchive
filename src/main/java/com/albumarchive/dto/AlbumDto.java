@@ -26,10 +26,6 @@ public class AlbumDto {
     @JsonProperty("name")
     private String albumName;
 
-    // @JsonProperty("artist")
-    // private String artistName;
-
-
     @Data
     public static class ImageDto {
         @JsonProperty("#text")

@@ -34,5 +34,26 @@ public class AddController {
         return "add";
     }
 
+    //アルバム登録確認画面表示
+    @GetMapping("/AlbumArchive/add/confirm")
+    public String showAddConfirmPage(
+                        @RequestParam String artistName,
+                        @RequestParam String albumName,
+                        Model model
+                    ) {
+        List<Album> albumList = addAlbumService.searchAlbums(artistName);
+        
+        Album albumDetails = null;
+        for (Album album : albumList) {
+            if (album.getAlbumName().equals(albumName)) {
+                albumDetails = album;
+                break;
+            }
+        }
+        model.addAttribute("albumDetails", albumDetails);
+        model.addAttribute("activeTab", "add");
+        return "add-confirm";
+    }
+
     
 }

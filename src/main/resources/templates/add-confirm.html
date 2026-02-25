@@ -68,32 +68,18 @@
                         </form> 
                 </div>
 
-                <!-- アルバム一覧表示エリア -->
-                 <!-- モバイル2列、PC5列 -->
-                <div th:if="${albums != null}" class="container-fluid mt-4">
-                    <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4 px-4">
-                        <!-- アルバムカード（繰り返し）-->
-                        <div class="col" th:each="album : ${albums}">
-                            <a th:href="@{/AlbumArchive/add/confirm(artistName=${album.artistName}, albumName=${album.albumName})}" class="text-decoration-none">
-                                <div class="card album-image h-100 border-0">
-                                    <!-- アルバムジャケット画像 -->
-                                    <img th:src="${album.imageUrl != null ? album.imageUrl : 'https://placehold.jp/24/333333/ffffff/200x200.png?text=No+Image'}"
+                <!-- アルバム登録確認エリア -->
+                    <div class="col-md-4 col-sm-6 px-4 py-4">
+                    <!-- アルバム画像取得 -->
+                     <img th:src="${albumDetails.imageUrl != null ? albumDetails.imageUrl : 'https://placehold.jp/24/333333/ffffff/200x200.png?text=No+Image'}"
                                      class="rounded-3"
                                      alt="Album Jacket"
                                      style="aspect-ratio: 1 / 1; object-fit: cover;">
-
-                                    <!-- アルバム情報     -->
-                                <div class="card-body p-2 text-center">
-                                    <h6 class="card-title text-truncate mb-1" th:text="${album.albumName}">Album Name</h6>
-                                    <p class="card-text small text-secondary text-truncate" th:text="${album.artistName}">Artist Name</p>
-                                </div>
-                                </div>
-                            </a>
+                            <h2 th:text="${albumDetails.albumName}">AlbumName</h2>
+                            <p th:text="${albumDetails.artistName}">ArtistName</p>
                         </div>
                     </div>
-                  
                 </div>
-
 			</div>
 		</div>
 	</div>

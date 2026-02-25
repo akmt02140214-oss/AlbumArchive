@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class LastFmResponse {
+public class TopAlbumResponse {
 
     //アルバム名でも検索できる機能を実装する可能性があるためコメントアウト
     // private Results results;

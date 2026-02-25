@@ -19,5 +19,4 @@ public class AddAlbumServiceImpl implements AddAlbumService {
         List<Album> albumList = addAlbumRepository.searchAlbums(query);
         return albumList;
     }
-
 }

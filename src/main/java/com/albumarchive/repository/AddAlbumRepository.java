@@ -7,5 +7,4 @@ import com.albumarchive.entity.Album;
 public interface AddAlbumRepository {
 
     List<Album> searchAlbums(String searchKeywords);
-
 }
