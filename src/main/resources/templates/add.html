@@ -63,10 +63,20 @@
                         <form th:action="@{/AlbumArchive/add/search}" method="GET" class="flex-grow-1 d-flex justify-content-end me-5">
                             <div class="position-relative w-50 me-5">
                                 <button class="btn position-absolute bg-transparent" type="submit"><i class="bi bi-search"></i></button>
-                                <input type="search" name="query" class="form-control searchbar ps-5" placeholder="Search albums...">
+                                <input type="search" name="query" class="form-control searchbar ps-5" placeholder="Search albums..." th:value="${searchQuery}">
                             </div>
                         </form> 
-                </div>
+                    </div>
+
+                    <!-- アルバムが登録された時のポップアップ -->
+                         <div th:if="${successMsg}">
+                            <div class="alert alert-primary d-flex align-items-center fade show alert-fade-in" role="alert">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                <span th:text="${successMsg}"></span>
+                                <hr>
+                                <a th:href="@{/AlbumArchive/library}" class="alert-link ps-2">Check to library</a>
+                            </div> 
+                         </div>
 
                 <!-- アルバム一覧表示エリア -->
                  <!-- モバイル2列、PC5列 -->
@@ -74,7 +84,7 @@
                     <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4 px-4">
                         <!-- アルバムカード（繰り返し）-->
                         <div class="col" th:each="album : ${albums}">
-                            <a th:href="@{/AlbumArchive/add/confirm(artistName=${album.artistName}, albumName=${album.albumName})}" class="text-decoration-none">
+                            <a th:href="@{/AlbumArchive/add/confirm(artistName=${album.artistName}, albumName=${album.albumName}, query=${searchQuery})}" class="text-decoration-none">
                                 <div class="card album-image h-100 border-0">
                                     <!-- アルバムジャケット画像 -->
                                     <img th:src="${album.imageUrl != null ? album.imageUrl : 'https://placehold.jp/24/333333/ffffff/200x200.png?text=No+Image'}"

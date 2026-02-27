@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.albumarchive.entity.Album;
 import com.albumarchive.service.AddAlbumService;
@@ -30,6 +32,7 @@ public class AddController {
     public String showSearchResultPage(@RequestParam String query, Model model) {
         List<Album> albumList = addAlbumService.searchAlbums(query);
         model.addAttribute("albums", albumList);
+        model.addAttribute("searchQuery", query);
         model.addAttribute("activeTab", "add");
         return "add";
     }
@@ -39,6 +42,7 @@ public class AddController {
     public String showAddConfirmPage(
                         @RequestParam String artistName,
                         @RequestParam String albumName,
+                        @RequestParam String query,
                         Model model
                     ) {
         List<Album> albumList = addAlbumService.searchAlbums(artistName);
@@ -51,8 +55,16 @@ public class AddController {
             }
         }
         model.addAttribute("albumDetails", albumDetails);
+        model.addAttribute("searchQuery", query);
         model.addAttribute("activeTab", "add");
         return "add-confirm";
+    }
+
+    // アルバム登録完了画面表示(add.htmlへのリダイレクト)
+    @PostMapping("/AlbumArchive/add/register")
+    public String showAddPageRedirect(RedirectAttributes ra) {
+        ra.addFlashAttribute("successMsg", "Added to your library.");
+        return "redirect:/AlbumArchive/add";
     }
 
     

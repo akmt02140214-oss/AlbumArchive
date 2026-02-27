@@ -56,33 +56,99 @@
 
 			<!--メインコンテンツ-->
 			<div class="col-md-10 main-content order-1 order-md-2 text-white">
+
+                
                 <div class="d-flex align-items-center ps-4 pt-4">
 				    <h1 class="text-white">Add</h1>
+                   
 
                         <!-- アルバム検索フォーム -->
                         <form th:action="@{/AlbumArchive/add/search}" method="GET" class="flex-grow-1 d-flex justify-content-end me-5">
                             <div class="position-relative w-50 me-5">
                                 <button class="btn position-absolute bg-transparent" type="submit"><i class="bi bi-search"></i></button>
-                                <input type="search" name="query" class="form-control searchbar ps-5" placeholder="Search albums...">
+                                <input type="search" name="query" class="form-control searchbar ps-5" placeholder="Search albums..." th:value="${searchQuery}">
                             </div>
                         </form> 
                 </div>
 
                 <!-- アルバム登録確認エリア -->
-                    <div class="col-md-4 col-sm-6 px-4 py-4">
+                    <div class="px-4">
+                        <!-- 戻るアイコン -->
+                        <a th:href="@{/AlbumArchive/add/search(query=${searchQuery})}" class="back-link">
+                        <i class="bi bi-chevron-left"></i></a>
+                        <div class="row align-content-center d-flex pt-5"><div class="col-md-auto">
+                            
                     <!-- アルバム画像取得 -->
                      <img th:src="${albumDetails.imageUrl != null ? albumDetails.imageUrl : 'https://placehold.jp/24/333333/ffffff/200x200.png?text=No+Image'}"
-                                     class="rounded-3"
+                                     class="rounded-3 mb-2"
                                      alt="Album Jacket"
                                      style="aspect-ratio: 1 / 1; object-fit: cover;">
-                            <h2 th:text="${albumDetails.albumName}">AlbumName</h2>
-                            <p th:text="${albumDetails.artistName}">ArtistName</p>
-                        </div>
+                            <h3 th:text="${albumDetails.albumName}">AlbumName</h3>
+                            <h4 th:text="${albumDetails.artistName}">ArtistName</h4>
                     </div>
-                </div>
-			</div>
-		</div>
-	</div>
+
+                        <!-- 星評価 -->
+                        <div class="col-md">
+                        <div class="rating-container">
+                            <h4>Rating</h4>
+                            <div class="star-rating">
+                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+                                <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+                                <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+                                <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                            </div>
+                        </div>
+
+                        <!-- ジャンル -->
+                        <div class="mt-4">
+                            <h4>Genres</h4>
+                            <div class="genre-group">
+                            <input type="checkbox" id="genre1" name="genres" value="Ambient"><label for="genre1">#Ambient</label>
+                            <input type="checkbox" id="genre2" name="genres" value="Blues"><label for="genre2">#Blues</label>
+                            <input type="checkbox" id="genre3" name="genres" value="Classical"><label for="genre3">#Classical</label>
+                            <input type="checkbox" id="genre4" name="genres" value="Country"><label for="genre4">#Country</label>
+                            <input type="checkbox" id="genre5" name="genres" value="Dance"><label for="genre5">#Dance</label>
+                            <input type="checkbox" id="genre6" name="genres" value="Electronic"><label for="genre6">#Electronic</label>
+                            <input type="checkbox" id="genre7" name="genres" value="Entertainment"><label for="genre7">#Entertainment</label>
+                            <input type="checkbox" id="genre8" name="genres" value="Experimental"><label for="genre8">#Experimental</label>
+                            <input type="checkbox" id="genre9" name="genres" value="Folk"><label for="genre9">#Folk</label>
+                            <input type="checkbox" id="genre10" name="genres" value="HipHop"><label for="genre10">#HipHop</label>
+                            <input type="checkbox" id="genre11" name="genres" value="Industrial"><label for="genre11">#Industrial</label>
+                            <input type="checkbox" id="genre12" name="genres" value="Jazz"><label for="genre12">#Jazz</label>
+                            <input type="checkbox" id="genre13" name="genres" value="Metal"><label for="genre13">#Metal</label>
+                            <input type="checkbox" id="genre14" name="genres" value="Pop"><label for="genre14">#Pop</label>
+                            <input type="checkbox" id="genre15" name="genres" value="Punk"><label for="genre15">#Punk</label>
+                            <input type="checkbox" id="genre16" name="genres" value="R&B"><label for="genre16">#R&B</label>
+                            <input type="checkbox" id="genre17" name="genres" value="Reggae"><label for="genre17">#Reggae</label>
+                            <input type="checkbox" id="genre18" name="genres" value="Rock"><label for="genre18">#Rock</label>
+                            <input type="checkbox" id="genre19" name="genres" value="Ska"><label for="genre19">#Ska</label>
+                            </div>
+                        </div>
+
+                        <!-- メモ -->
+                         <div class="mt-4">
+                            <h4>Memo</h4>
+                                <div class="memo-group">
+                                <textarea id="memo" name="memo" rows="6" placeholder="Write Free"></textarea>
+                            </div>
+                         </div>
+
+                        <!-- 送信ボタン -->
+                        <form id="addForm" th:action="@{/AlbumArchive/add/register}" method="POST">
+                        <div class="justify-content-end d-flex">
+                            <button type="submit" class="btn btn-primary me-2">
+                                <i class="bi bi-plus-circle me-2"></i>Add
+                            </button>
+                        </div>
+                        </form>
+                        </div>
+
+                        </div>
+			        </div>
+		    </div>
+	    </div>
+    </div>
 
 </body>
 </html>

@@ -3,6 +3,7 @@
 }
 
 .sidebar {
+    position:fixed;
     background-color: #202020; 
     min-height: 100vh;
     
@@ -10,6 +11,7 @@
 .main-content {
     background-color: #282828;
     color: white;
+    margin-left: 16.6%;
     min-height: 100vh;
 }
 .nav-link {
@@ -39,7 +41,101 @@
     transform: scale(1.02);
     opacity: 0.8;
 }
+/* 検索バー */
+.searchbar::-webkit-search-cancel-button {
+    cursor: pointer;
+}
 
+/* 星評価 */
+.star-rating {
+    direction: rtl;
+    display: inline-flex;
+    font-size: 0;
+}
+.star-rating input[type="radio"] {
+    display: none;
+}
+.star-rating label {
+    color: #ddd;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+}
+.star-rating label:before {
+    content: "★";
+}
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffd700;
+}
+.star-rating input[type="radio"]:checked ~ label {
+    color: #ffd700;
+}
+
+/* ジャンル */
+.genre-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.genre-group input[type="checkbox"] {
+    display: none;
+}
+.genre-group label {
+    display: inline-block;
+    padding: 2px 6px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #333;
+    color: #eee;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.genre-group label:hover {
+    background-color: #444;
+}
+.genre-group input[type="checkbox"]:checked + label {
+    background-color: #0d6efd;
+}
+
+/* メモ */
+.memo-group textarea {
+    width: 100%;
+    background-color: #2c2c2c;
+    color: white;
+    border: 1px solid white;
+    border-radius: 6px;
+    padding: 12px;
+    resize: none;
+
+}
+/* 戻るアイコン */
+.back-link {
+    color: #b3b3b3;
+    font-size: 1.2rem;
+    border-radius: 20%;
+    transition: all 0.2s;
+}
+.back-link:hover {
+    color: #b3b3b3;
+    background-color: #202020;
+}
+
+/* ポップアップのアニメーション */
+.alert-fade-in {
+    animation: customFadeIn 0.5s;
+}
+@keyframes customFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 /* スマホ用の設定 */
 @media (max-width: 767px) {
@@ -81,5 +177,9 @@
         align-items: center;
         justify-content: center;
         border-radius: 8px;
+    }
+    .main-content {
+        padding-bottom: 80px;
+        margin-left: 0;
     }
 }
