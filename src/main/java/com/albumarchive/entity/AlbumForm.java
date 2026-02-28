@@ -1,22 +1,19 @@
 package com.albumarchive.entity;
 
 import java.time.LocalDateTime;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
+import java.util.List;
 
 import lombok.Data;
 
-// DB登録用Entity
+
+// 画面表示・フォーム受け取り・API検索結果の表示に使用
 @Data
-@Table("albums")
-public class Album {
+public class AlbumForm {
 	
-	@Id
-	private Long id;
 	private String albumName;
 	private String artistName;
 	private String imageUrl;
+	private List<String> genres;
 	private Integer rating;
 	private String memo;
 	private LocalDateTime registerDate;

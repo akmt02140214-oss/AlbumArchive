@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.albumarchive.entity.Album;
-import com.albumarchive.service.AddAlbumService;
+import com.albumarchive.entity.AlbumForm;
+import com.albumarchive.service.AlbumService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AddController {
 
-    private final AddAlbumService addAlbumService;
+    private final AlbumService albumService;
 
     //アルバム追加画面表示
 	@GetMapping("/AlbumArchive/add")
@@ -30,7 +30,7 @@ public class AddController {
     //アルバム検索結果画面表示
     @GetMapping("/AlbumArchive/add/search")
     public String showSearchResultPage(@RequestParam String query, Model model) {
-        List<Album> albumList = addAlbumService.searchAlbums(query);
+        List<AlbumForm> albumList = albumService.searchAlbums(query);
         model.addAttribute("albums", albumList);
         model.addAttribute("searchQuery", query);
         model.addAttribute("activeTab", "add");
@@ -45,10 +45,10 @@ public class AddController {
                         @RequestParam String query,
                         Model model
                     ) {
-        List<Album> albumList = addAlbumService.searchAlbums(artistName);
+        List<AlbumForm> albumList = albumService.searchAlbums(artistName);
         
-        Album albumDetails = null;
-        for (Album album : albumList) {
+        AlbumForm albumDetails = null;
+        for (AlbumForm album : albumList) {
             if (album.getAlbumName().equals(albumName)) {
                 albumDetails = album;
                 break;
@@ -62,7 +62,8 @@ public class AddController {
 
     // アルバム登録完了画面表示(add.htmlへのリダイレクト)
     @PostMapping("/AlbumArchive/add/register")
-    public String showAddPageRedirect(RedirectAttributes ra) {
+    public String showAddPageRedirect(RedirectAttributes ra, AlbumForm albumForm) {
+        albumService.addAlbum(albumForm);
         ra.addFlashAttribute("successMsg", "Added to your library.");
         return "redirect:/AlbumArchive/add";
     }

@@ -1,0 +1,19 @@
+DROP TABLE IF EXISTS album_genres;
+DROP TABLE IF EXISTS albums;
+
+CREATE TABLE albums (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    album_name VARCHAR(255) NOT NULL,
+    artist_name VARCHAR(255) NOT NULL,
+    image_url VARCHAR(500),
+    rating INT,
+    memo TEXT,
+    register_date DATETIME
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE album_genres (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    album_id BIGINT NOT NULL,
+    genre VARCHAR(100) NOT NULL,
+    FOREIGN KEY (album_id) REFERENCES albums(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -76,6 +76,13 @@
                         <!-- 戻るアイコン -->
                         <a th:href="@{/AlbumArchive/add/search(query=${searchQuery})}" class="back-link">
                         <i class="bi bi-chevron-left"></i></a>
+
+                        <form id="addForm" th:action="@{/AlbumArchive/add/register}" method="POST">
+                            <input type="hidden" name="albumName" th:value="${albumDetails.albumName}">
+                            <input type="hidden" name="artistName" th:value="${albumDetails.artistName}">
+                            <input type="hidden" name="imageUrl" th:value="${albumDetails.imageUrl}">
+
+
                         <div class="row align-content-center d-flex pt-5"><div class="col-md-auto">
                             
                     <!-- アルバム画像取得 -->
@@ -135,7 +142,6 @@
                          </div>
 
                         <!-- 送信ボタン -->
-                        <form id="addForm" th:action="@{/AlbumArchive/add/register}" method="POST">
                         <div class="justify-content-end d-flex">
                             <button type="submit" class="btn btn-primary me-2">
                                 <i class="bi bi-plus-circle me-2"></i>Add
