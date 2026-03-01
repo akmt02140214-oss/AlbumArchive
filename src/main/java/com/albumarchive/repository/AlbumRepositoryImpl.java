@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -95,5 +96,26 @@ public class AlbumRepositoryImpl implements AlbumRepository {
 
         Number generatedId = insert.executeAndReturnKey(parameters);
         album.setId(generatedId.longValue());
+    }
+
+    @Override
+    public List<Album> searchMyAlbums(int offset) {
+
+        String sql = "SELECT * FROM albums ORDER BY id DESC LIMIT 30 OFFSET ?";
+
+        //for文でEntityに詰め替えていた処理
+        List<Album> myAlbums = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Album.class), offset);
+        return myAlbums;
+    }
+
+    @Override
+    public int getTotalAlbumCount() {
+
+        String sql = "SELECT COUNT(*) FROM albums";
+
+        int totalAlbumCount = jdbcTemplate.queryForObject(sql,Integer.class);
+
+        return totalAlbumCount;
+        
     }
 }

@@ -137,6 +137,34 @@
     }
 }
 
+/* ページネーション */
+.pagination {
+    margin-top:3rem;
+    gap:8px;
+}
+
+.page-item-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    background-color: #181818;
+    color: white;
+    text-decoration: none;
+    border-radius: 20%;
+}
+
+.page-item-link:hover {
+    color: #ffffff;
+    background-color: #333333;
+}
+
+.page-item.active .page-item-link {
+    background-color: #ffffff;
+    color: #000000;
+}
+
 /* スマホ用の設定 */
 @media (max-width: 767px) {
     .sidebar {

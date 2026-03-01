@@ -54,4 +54,16 @@ public class AlbumServiceImpl implements AlbumService {
         }
 
     }
+
+    @Override
+    public List<Album> searchMyAlbums(int offset) {
+        
+        List<Album> myAlbums = albumRepository.searchMyAlbums(offset);
+        return myAlbums;
+    }
+
+    @Override
+    public int getTotalAlbumCount() {
+        return albumRepository.getTotalAlbumCount();
+    }
 }

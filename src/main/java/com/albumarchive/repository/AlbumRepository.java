@@ -10,4 +10,8 @@ public interface AlbumRepository {
     List<AlbumForm> searchAlbums(String searchKeywords);
 
     void addAlbum(Album album);
+
+    List<Album> searchMyAlbums(int offset);
+
+    int getTotalAlbumCount();
 }

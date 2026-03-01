@@ -12,13 +12,6 @@ public class MainController {
 		model.addAttribute("activeTab", "home");		
 		return "home";
 	}
-	
-	//ライブラリ画面表示
-	@GetMapping("/AlbumArchive/library")
-	public String showLibrary(Model model){
-		model.addAttribute("activeTab", "library");
-		return "library";
-	}
 
 	//アルバム編集画面表示
 	@GetMapping("/AlbumArchive/edit")
