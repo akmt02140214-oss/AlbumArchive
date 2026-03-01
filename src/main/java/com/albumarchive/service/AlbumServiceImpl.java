@@ -56,9 +56,9 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public List<Album> searchMyAlbums(int offset) {
+    public List<Album> searchMyAlbums(int offset, String sort) {
         
-        List<Album> myAlbums = albumRepository.searchMyAlbums(offset);
+        List<Album> myAlbums = albumRepository.searchMyAlbums(offset, sort);
         return myAlbums;
     }
 

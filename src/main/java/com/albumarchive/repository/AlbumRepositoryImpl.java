@@ -80,6 +80,7 @@ public class AlbumRepositoryImpl implements AlbumRepository {
         return albumList;
     }
 
+    // アルバム登録処理
     @Override
     public void addAlbum(Album album) {
         SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate)
@@ -98,16 +99,27 @@ public class AlbumRepositoryImpl implements AlbumRepository {
         album.setId(generatedId.longValue());
     }
 
+    // 登録済みアルバム取得処理
     @Override
-    public List<Album> searchMyAlbums(int offset) {
+    public List<Album> searchMyAlbums(int offset, String sort) {
 
-        String sql = "SELECT * FROM albums ORDER BY id DESC LIMIT 30 OFFSET ?";
+        // アルバム並び替え機能
+        String orderBy = "register_date DESC, id DESC";
+
+        if ("oldest".equals(sort)) {
+            orderBy = "register_date ASC, id ASC";
+        } else if ("rating".equals(sort)) {
+            orderBy = "rating DESC, register_date DESC";
+        }
+
+        String sql = "SELECT * FROM albums ORDER BY " + orderBy + " LIMIT 30 OFFSET ?";
 
         //for文でEntityに詰め替えていた処理
         List<Album> myAlbums = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Album.class), offset);
         return myAlbums;
     }
 
+    // アルバム数集計処理
     @Override
     public int getTotalAlbumCount() {
 

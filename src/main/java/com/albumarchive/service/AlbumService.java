@@ -14,7 +14,7 @@ public interface AlbumService {
     void addAlbum(AlbumForm albumForm);
 
     //登録済みアルバム一覧表示(Library)
-    List<Album> searchMyAlbums(int pageCount);
+    List<Album> searchMyAlbums(int pageCount, String sort);
 
     //登録済みアルバム数取得
     int getTotalAlbumCount();

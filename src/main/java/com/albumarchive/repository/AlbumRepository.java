@@ -11,7 +11,7 @@ public interface AlbumRepository {
 
     void addAlbum(Album album);
 
-    List<Album> searchMyAlbums(int offset);
+    List<Album> searchMyAlbums(int offset, String sort);
 
     int getTotalAlbumCount();
 }
