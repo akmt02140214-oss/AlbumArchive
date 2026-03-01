@@ -56,21 +56,22 @@
 
 			<!--メインコンテンツ-->
 			<div class="col-md-10 main-content order-1 order-md-2 text-white">
-                <div class="d-flex align-items-center ps-4 pt-4">
+                <div class="d-flex align-items-center justify-content-between pt-4 ps-4 pe-4">
 				    <h1 class="text-white">Library</h1>
 
-                        <!-- アルバム検索フォーム -->
-                        <!-- <form th:action="@{/AlbumArchive/add/search}" method="GET" class="flex-grow-1 d-flex justify-content-end me-5">
-                            <div class="position-relative w-50 me-5">
-                                <button class="btn position-absolute bg-transparent" type="submit"><i class="bi bi-search"></i></button>
-                                <input type="search" name="query" class="form-control searchbar ps-5" placeholder="Search albums..." th:value="${searchQuery}">
-                            </div>
-                        </form>  -->
-                    </div>
+                       <form th:action="@{/AlbumArchive/library}" method="GET" class="d-flex align-items-center">
+                        <select name="sort" class="form-select-sort" onchange="this.form.submit()">
+                                <option value="newest" th:selected="${sort == 'newest'}">Newest</option>
+                                <option value="oldest" th:selected="${sort == 'oldest'}">Oldest</option>
+                                <option value="rating" th:selected="${sort == 'rating'}">Top Rated</option>
+                            </select>
+                       </form>
+                </div>
 
                 <!-- アルバム一覧表示エリア -->
                  <!-- モバイル2列、PC5列 -->
                 <div class="container-fluid mt-4">
+                    <div th:if="${myAlbums != null and !#lists.isEmpty(myAlbums)}">
                     <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4 px-4">
                         <!-- アルバムカード（繰り返し）-->
                         <div class="col" th:each="album : ${myAlbums}">
@@ -98,11 +99,17 @@
                             <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages -1)}"
                                 th:classappend="${i == pageCount} ? 'active'">
                             <a class="page-item-link"
-                               th:href="@{/AlbumArchive/library(pageCount=${i})}"
+                               th:href="@{/AlbumArchive/library(pageCount=${i}, sort=${sort})}"
                                th:text="${i + 1}">1</a>
                             </li>
                         </ul>
                     </nav>
+                    </div>
+
+                    <!-- DBが空の場合 -->
+                     <div class="text-center mt-5"th:if="${myAlbums == null or #lists.isEmpty(myAlbums)}">
+                        <h5>Your library is empty.</h5>
+                     </div>
                         
                     
                   

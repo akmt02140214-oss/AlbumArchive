@@ -165,6 +165,27 @@
     color: #000000;
 }
 
+/* 並び替えセレクトボックス */
+.form-select-sort {
+    background-color: #202020;
+    color: white;
+    border-radius: 20px;
+    padding: 0.6rem 2.5rem 0.6rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all;
+}
+
+.form-select-sort:hover {
+    background-color: #ffffff;
+    color: #202020;
+}
+
+.form-select-sort option {
+    background-color: #202020;
+    color: white;
+}
+
 /* スマホ用の設定 */
 @media (max-width: 767px) {
     .sidebar {

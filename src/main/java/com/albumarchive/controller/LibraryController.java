@@ -20,7 +20,9 @@ public class LibraryController {
     
     	//ライブラリ画面表示
 	@GetMapping("/AlbumArchive/library")
-	public String showLibrary(@RequestParam(defaultValue = "0") int pageCount, Model model){
+	public String showLibrary(@RequestParam(defaultValue = "0") int pageCount,
+	                          @RequestParam(defaultValue = "newest") String sort,
+							   Model model){
 
 		int pageSize = 30;
 
@@ -30,11 +32,12 @@ public class LibraryController {
 		if (totalPages == 0) totalPages = 1;
 
 		
-        List<Album> myAlbums = albumService.searchMyAlbums(pageCount * pageSize);
+        List<Album> myAlbums = albumService.searchMyAlbums(pageCount * pageSize, sort);
 
 		model.addAttribute("myAlbums", myAlbums);
 		model.addAttribute("pageCount", pageCount);
 		model.addAttribute("totalPages", totalPages);
+		model.addAttribute("sort", sort);
 		model.addAttribute("activeTab", "library");
 		return "library";
 	}
