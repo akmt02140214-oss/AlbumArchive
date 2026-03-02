@@ -59,6 +59,7 @@
                 <div class="d-flex align-items-center justify-content-between pt-4 ps-4 pe-4">
 				    <h1 class="text-white">Library</h1>
 
+                        <!-- 並び替えセレクトボックス -->
                        <form th:action="@{/AlbumArchive/library}" method="GET" class="d-flex align-items-center">
                         <select name="sort" class="form-select-sort" onchange="this.form.submit()">
                                 <option value="newest" th:selected="${sort == 'newest'}">Newest</option>
@@ -75,7 +76,7 @@
                     <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 g-4 px-4">
                         <!-- アルバムカード（繰り返し）-->
                         <div class="col" th:each="album : ${myAlbums}">
-                            <a th:href="@{/AlbumArchive/add/confirm(artistName=${album.artistName}, albumName=${album.albumName}, query=${searchQuery})}" class="text-decoration-none">
+                            <a th:href="@{/AlbumArchive/library/details(id=${album.id})}" class="text-decoration-none">
                                 <div class="card album-image h-100 border-0">
                                     <!-- アルバムジャケット画像 -->
                                     <img th:src="${album.imageUrl}"

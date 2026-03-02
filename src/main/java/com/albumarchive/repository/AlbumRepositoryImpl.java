@@ -130,4 +130,22 @@ public class AlbumRepositoryImpl implements AlbumRepository {
         return totalAlbumCount;
         
     }
+
+    // 登録済みアルバム取得処理
+    @Override
+    public Album getAlbumById(Long id) {
+        String sql = "SELECT * FROM albums WHERE id = ?";
+
+        Album album = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Album.class), id);
+        return album;
+    }
+
+    // 登録済みアルバムのジャンル取得処理
+    @Override
+    public List<String> getGenresByAlbumId(Long id) {
+        String sql = "SELECT genre FROM album_genres WHERE album_id = ?";
+
+        List<String> genres = jdbcTemplate.queryForList(sql, String.class, id);
+        return genres;
+    }
 }
