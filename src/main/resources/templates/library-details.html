@@ -71,13 +71,24 @@
                        </form>
                 </div>
 
+                <!-- アルバムが編集された時のポップアップ -->
+                         <div th:if="${message}">
+                            <div class="alert alert-primary d-flex align-items-center fade show alert-fade-in" role="alert">
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                                <span th:text="${message}"></span>
+                                <hr>
+                                <a th:href="@{/AlbumArchive/library}" class="alert-link ps-2">Back to library</a>
+                            </div> 
+                         </div>
+
                 <!-- アルバム登録確認エリア -->
                     <div class="px-4">
                         <!-- 戻るアイコン -->
                         <a th:href="@{/AlbumArchive/library}" class="back-link">
                         <i class="bi bi-chevron-left"></i></a>
 
-                        <form id="addForm" th:action="@{/AlbumArchive/add/register}" method="POST">
+                        <form id="addForm" th:action="@{/AlbumArchive/library/update}" method="POST">
+                            <input type="hidden" name="id" th:value="${album.id}">
                             <input type="hidden" name="albumName" th:value="${album.albumName}">
                             <input type="hidden" name="artistName" th:value="${album.artistName}">
                             <input type="hidden" name="imageUrl" th:value="${album.imageUrl}">

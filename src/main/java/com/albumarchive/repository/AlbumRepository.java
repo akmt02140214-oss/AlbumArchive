@@ -25,4 +25,9 @@ public interface AlbumRepository {
     // 登録済みアルバムのジャンル取得機能
     List<String> getGenresByAlbumId(Long id);
 
+    // 登録済みアルバム編集処理
+    void updateAlbum(Album album);
+
+    // 登録済みアルバムのジャンル削除機能
+    void deleteGenresByAlbumId(Long id);
 }

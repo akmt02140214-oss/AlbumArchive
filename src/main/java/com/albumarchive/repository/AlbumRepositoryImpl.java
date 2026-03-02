@@ -148,4 +148,18 @@ public class AlbumRepositoryImpl implements AlbumRepository {
         List<String> genres = jdbcTemplate.queryForList(sql, String.class, id);
         return genres;
     }
+
+    @Override
+    public void updateAlbum(Album album) {
+        String sql = "UPDATE albums SET rating = ?, memo = ? WHERE id = ?";
+
+        jdbcTemplate.update(sql, album.getRating(), album.getMemo(), album.getId());
+    }
+
+    @Override
+    public void deleteGenresByAlbumId(Long id) {
+        String sql = "DELETE FROM album_genres WHERE album_id = ?";
+
+        jdbcTemplate.update(sql, id);
+    }
 }
