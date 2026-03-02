@@ -69,4 +69,13 @@ public class LibraryController {
 		return "redirect:/AlbumArchive/library/details?id=" + id;
 	}
 	
+	// 登録済みアルバム削除処理
+	@PostMapping("/AlbumArchive/library/delete")
+	public String deleteAlbum(@RequestParam("id") Long id, RedirectAttributes ra) {
+
+		albumService.deleteAlbum(id);
+		ra.addFlashAttribute("message", "Album deleted.");
+
+		return "redirect:/AlbumArchive/library";
+	}
 }

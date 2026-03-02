@@ -28,4 +28,6 @@ public interface AlbumService {
     // 登録済みアルバムの編集処理
     void updateAlbum(Long id, AlbumForm albumForm);
 
+    // 登録済みアルバムの削除処理
+    void deleteAlbum(Long id);
 }
