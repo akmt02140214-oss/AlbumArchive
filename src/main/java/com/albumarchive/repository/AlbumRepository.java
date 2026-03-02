@@ -7,6 +7,9 @@ import com.albumarchive.entity.AlbumForm;
 
 public interface AlbumRepository {
 
+    // 最近追加した5つのアルバムを取得
+    List<Album> get5AlbumsOrderByRegisterDateDesc();
+
     // アルバム検索機能
     List<AlbumForm> searchAlbums(String searchKeywords);
 

@@ -172,4 +172,13 @@ public class AlbumRepositoryImpl implements AlbumRepository {
 
         jdbcTemplate.update(sql, id);
     }
+
+    @Override
+    public List<Album> get5AlbumsOrderByRegisterDateDesc() {
+        String sql = "SELECT * FROM albums ORDER BY register_date DESC, id DESC LIMIT 5";
+
+        List<Album> recentAlbums = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Album.class));
+        return recentAlbums;
+
+    }
 }
