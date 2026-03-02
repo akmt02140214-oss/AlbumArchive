@@ -2,6 +2,8 @@ package com.albumarchive.repository;
 
 import java.util.List;
 
+import com.albumarchive.dto.ArtistRankingDto;
+import com.albumarchive.dto.GenreRankingDto;
 import com.albumarchive.entity.Album;
 import com.albumarchive.entity.AlbumForm;
 
@@ -9,6 +11,12 @@ public interface AlbumRepository {
 
     // 最近追加した5つのアルバムを取得
     List<Album> get5AlbumsOrderByRegisterDateDesc();
+
+    // 登録したアーティストが多い順に3つ取得
+    List<ArtistRankingDto> getTop3Artists();
+
+    // 登録したジャンルが多い順に3つ取得
+    List<GenreRankingDto> getTop3Genres();
 
     // アルバム検索機能
     List<AlbumForm> searchAlbums(String searchKeywords);
