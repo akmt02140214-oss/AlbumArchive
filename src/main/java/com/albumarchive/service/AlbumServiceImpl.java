@@ -66,4 +66,17 @@ public class AlbumServiceImpl implements AlbumService {
     public int getTotalAlbumCount() {
         return albumRepository.getTotalAlbumCount();
     }
+
+    @Override
+    public Album getAlbumById(Long id) {
+        Album album = albumRepository.getAlbumById(id);
+        return album;
+    }
+
+    @Override
+    public List<String> getGenresByAlbumId(Long id) {
+        List<String> genres = albumRepository.getGenresByAlbumId(id);
+        return genres;
+
+    }
 }

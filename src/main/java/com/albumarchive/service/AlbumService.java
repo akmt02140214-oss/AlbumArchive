@@ -19,4 +19,10 @@ public interface AlbumService {
     //登録済みアルバム数取得
     int getTotalAlbumCount();
 
+    // 登録済みアルバム詳細情報取得
+    Album getAlbumById(Long id);
+
+    // 登録済みアルバムのジャンル情報取得
+    List<String> getGenresByAlbumId(Long id);
+
 }
