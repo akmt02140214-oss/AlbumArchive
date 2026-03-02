@@ -50,15 +50,6 @@
 			<div class="col-md-10 main-content order-1 order-md-2 text-white">
                 <div class="d-flex align-items-center justify-content-between pt-4 ps-4 pe-4">
 				    <h1 class="text-white">Home</h1>
-
-                        <!-- 並び替えセレクトボックス
-                       <form th:action="@{/AlbumArchive/library}" method="GET" class="d-flex align-items-center">
-                        <select name="sort" class="form-select-sort" onchange="this.form.submit()">
-                                <option value="newest" th:selected="${sort == 'newest'}">Newest</option>
-                                <option value="oldest" th:selected="${sort == 'oldest'}">Oldest</option>
-                                <option value="rating" th:selected="${sort == 'rating'}">Top Rated</option>
-                            </select>
-                       </form> -->
                 </div>
 
                 <!-- アルバム一覧表示エリア -->
@@ -87,17 +78,6 @@
                         </div>
                     </div>
 
-                    <!-- <nav aria-label="Page navigation">
-                        <ul class="pagination justify-content-center">
-
-                            <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPages -1)}"
-                                th:classappend="${i == pageCount} ? 'active'">
-                            <a class="page-item-link"
-                               th:href="@{/AlbumArchive/library(pageCount=${i}, sort=${sort})}"
-                               th:text="${i + 1}">1</a>
-                            </li>
-                        </ul>
-                    </nav> -->
                     </div>
 
                     <!-- DBが空の場合 -->
@@ -105,10 +85,36 @@
                         <h5>Lets add your Albums.</h5>
                      </div>
                         
-                    
-                  
-                </div>
+                     <div class="container-fluid mt-5">
+                        <div class="row">
+                            <div class="col-6">
+                        <h3 class="mb-3">Top 3 Artists</h3>
+                        <div th:if="${top3Artists != null and !#lists.isEmpty(top3Artists)}">
+                            <div th:each="artist, iter : ${top3Artists}" class="d-flex">
+                                    <h4 th:text="${iter.index + 1}" class="me-3 mb-3">1</h4>
+                                    <h4 th:text="${artist.artistName}">Artist Name</h4>
+                            </div>
+                        </div>
+                     <div class="text-center" th:if="${top3Artists == null or #lists.isEmpty(top3Artists)}">
+                        <h4>No data available.</h4>
+                     </div>
+                     </div>
 
+                     <div class="col-6">
+                     <h3 class="mb-3">Top 3 Genres</h3>
+                        <div th:if="${top3Genres != null and !#lists.isEmpty(top3Genres)}">
+                            <div th:each="genre, iter : ${top3Genres}" class="d-flex">
+                                    <h4 th:text="${iter.index + 1}" class="me-3 mb-3">1</h4>
+                                    <h4 th:text="${genre.genre}">Genre Name</h4>
+                            </div>
+                        </div>
+                     <div class="text-center" th:if="${top3Artists == null or #lists.isEmpty(top3Artists)}">
+                        <h4>No data available.</h4>
+                     </div>
+                    </div>
+                  </div>
+                  </div>
+                  </div>
 			</div>
 		</div>
 	</div>

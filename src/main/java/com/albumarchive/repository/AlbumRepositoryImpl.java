@@ -14,6 +14,8 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.albumarchive.dto.AlbumDto;
+import com.albumarchive.dto.ArtistRankingDto;
+import com.albumarchive.dto.GenreRankingDto;
 import com.albumarchive.dto.TopAlbumResponse;
 import com.albumarchive.entity.Album;
 import com.albumarchive.entity.AlbumForm;
@@ -180,5 +182,30 @@ public class AlbumRepositoryImpl implements AlbumRepository {
         List<Album> recentAlbums = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Album.class));
         return recentAlbums;
 
+    }
+
+    // 登録したアーティストが多い順に3つ取得
+    @Override
+    public List<ArtistRankingDto> getTop3Artists() {
+        String sql = "SELECT artist_name, COUNT(*) as count " + 
+                     "FROM albums " + "GROUP BY artist_name " +
+                     "ORDER BY count DESC, artist_name ASC " + "LIMIT 3";
+
+                     List<ArtistRankingDto> top3Artists = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ArtistRankingDto.class));
+                     return top3Artists;
+
+
+                     
+    }
+
+    @Override
+    public List<GenreRankingDto> getTop3Genres() {
+        String sql = "SELECT genre, COUNT(*) as count " +
+                     "FROM album_genres " + "GROUP BY genre " +
+                     "ORDER BY count DESC, genre ASC " +
+                     "LIMIT 3";
+
+                     List<GenreRankingDto> top3Genres = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(GenreRankingDto.class));
+                     return top3Genres;
     }
 }

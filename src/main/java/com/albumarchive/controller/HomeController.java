@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.albumarchive.dto.ArtistRankingDto;
+import com.albumarchive.dto.GenreRankingDto;
 import com.albumarchive.entity.Album;
 import com.albumarchive.service.AlbumService;
 
@@ -21,8 +23,12 @@ public class HomeController {
 	public String showHome(Model model) {
 		
 		List<Album> recentAlbums = albumService.getRecentAlbums();
+		List<ArtistRankingDto> top3Artists = albumService.getTop3Artists();
+		List<GenreRankingDto> top3Genres = albumService.getTop3Genres();
 		
 		model.addAttribute("myAlbums", recentAlbums);
+		model.addAttribute("top3Artists", top3Artists);
+		model.addAttribute("top3Genres", top3Genres);
 		model.addAttribute("activeTab", "home");		
 		return "home";
 	}

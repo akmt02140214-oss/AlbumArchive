@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.albumarchive.dto.ArtistRankingDto;
+import com.albumarchive.dto.GenreRankingDto;
 import com.albumarchive.entity.Album;
 import com.albumarchive.entity.AlbumForm;
 import com.albumarchive.entity.AlbumGenre;
@@ -103,6 +105,7 @@ public class AlbumServiceImpl implements AlbumService {
         }
     }
 
+    // アルバム削除機能
     @Override
     @Transactional
     public void deleteAlbum(Long id) {
@@ -112,11 +115,25 @@ public class AlbumServiceImpl implements AlbumService {
         albumRepository.deleteAlbum(id);
     }
 
+    // 最近登録したアルバム取得機能
     @Override
     public List<Album> getRecentAlbums() {
         List<Album> recentAlbums = albumRepository.get5AlbumsOrderByRegisterDateDesc();
         return recentAlbums;
         }
+
+    // 登録したアーティストが多い順に3つ取得
+    @Override
+    public List<ArtistRankingDto> getTop3Artists() {
+        List<ArtistRankingDto> top3Artists = albumRepository.getTop3Artists();
+        return top3Artists;
+    }
+
+    @Override
+    public List<GenreRankingDto> getTop3Genres() {
+        List<GenreRankingDto> top3Genres = albumRepository.getTop3Genres();
+        return top3Genres;
+    }
 
     
 }
