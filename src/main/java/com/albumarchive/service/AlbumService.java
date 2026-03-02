@@ -25,4 +25,7 @@ public interface AlbumService {
     // 登録済みアルバムのジャンル情報取得
     List<String> getGenresByAlbumId(Long id);
 
+    // 登録済みアルバムの編集処理
+    void updateAlbum(Long id, AlbumForm albumForm);
+
 }

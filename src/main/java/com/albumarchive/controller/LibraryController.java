@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.albumarchive.entity.Album;
+import com.albumarchive.entity.AlbumForm;
 import com.albumarchive.service.AlbumService;
 
 import lombok.RequiredArgsConstructor;
@@ -43,6 +45,7 @@ public class LibraryController {
 		return "library";
 	}
 
+	// 登録済みアルバム詳細情報取得処理
 	@GetMapping("/AlbumArchive/library/details")
 	public String showLibraryDetailsPage(@RequestParam("id") Long id, Model model) {
 
@@ -55,4 +58,15 @@ public class LibraryController {
 		model.addAttribute("activeTab", "library");
 		return "library-details";
 	}
+
+	// 登録済みアルバム編集処理
+	@PostMapping("/AlbumArchive/library/update")
+	public String showLibraryPageRedirect(@RequestParam("id") Long id, AlbumForm albumForm, RedirectAttributes ra) {
+
+		albumService.updateAlbum(id, albumForm);
+
+		ra.addFlashAttribute("message", "Album updated.");
+		return "redirect:/AlbumArchive/library/details?id=" + id;
+	}
+	
 }

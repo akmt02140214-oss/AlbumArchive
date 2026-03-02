@@ -79,4 +79,26 @@ public class AlbumServiceImpl implements AlbumService {
         return genres;
 
     }
+
+    @Override
+    public void updateAlbum(Long id, AlbumForm albumForm) {
+        
+        Album album = new Album();
+        album.setId(id);
+        album.setRating(albumForm.getRating());
+        album.setMemo(albumForm.getMemo());
+        albumRepository.updateAlbum(album);
+
+        // 登録済みアルバムのジャンル削除
+        albumRepository.deleteGenresByAlbumId(id);
+
+        if (albumForm.getGenres() != null) {
+            for (String genre : albumForm.getGenres()) {
+                AlbumGenre albumGenre = new AlbumGenre();
+                albumGenre.setAlbumId(id);
+                albumGenre.setGenre(genre);
+                genreRepository.addGenre(albumGenre);
+            }
+        }
+    }
 }
