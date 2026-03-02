@@ -112,5 +112,11 @@ public class AlbumServiceImpl implements AlbumService {
         albumRepository.deleteAlbum(id);
     }
 
+    @Override
+    public List<Album> getRecentAlbums() {
+        List<Album> recentAlbums = albumRepository.get5AlbumsOrderByRegisterDateDesc();
+        return recentAlbums;
+        }
+
     
 }
