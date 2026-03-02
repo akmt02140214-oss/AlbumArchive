@@ -28,6 +28,9 @@ public interface AlbumRepository {
     // 登録済みアルバム編集処理
     void updateAlbum(Album album);
 
+    // 登録済みアルバム削除処理
+    void deleteAlbum(Long id);
+
     // 登録済みアルバムのジャンル削除機能
     void deleteGenresByAlbumId(Long id);
 }

@@ -149,6 +149,7 @@ public class AlbumRepositoryImpl implements AlbumRepository {
         return genres;
     }
 
+    // 登録済みアルバム編集処理
     @Override
     public void updateAlbum(Album album) {
         String sql = "UPDATE albums SET rating = ?, memo = ? WHERE id = ?";
@@ -156,9 +157,18 @@ public class AlbumRepositoryImpl implements AlbumRepository {
         jdbcTemplate.update(sql, album.getRating(), album.getMemo(), album.getId());
     }
 
+    // 登録済みアルバムのジャンル削除処理
     @Override
     public void deleteGenresByAlbumId(Long id) {
         String sql = "DELETE FROM album_genres WHERE album_id = ?";
+
+        jdbcTemplate.update(sql, id);
+    }
+
+    // 登録済みアルバム削除処理
+    @Override
+    public void deleteAlbum(Long id) {
+        String sql = "DELETE FROM albums WHERE id = ?";
 
         jdbcTemplate.update(sql, id);
     }

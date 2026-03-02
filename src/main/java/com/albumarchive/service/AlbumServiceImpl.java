@@ -80,6 +80,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     }
 
+    // 登録済みアルバム編集処理
     @Override
     public void updateAlbum(Long id, AlbumForm albumForm) {
         
@@ -101,4 +102,15 @@ public class AlbumServiceImpl implements AlbumService {
             }
         }
     }
+
+    @Override
+    @Transactional
+    public void deleteAlbum(Long id) {
+
+        albumRepository.deleteGenresByAlbumId(id);
+
+        albumRepository.deleteAlbum(id);
+    }
+
+    
 }
