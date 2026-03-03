@@ -1,173 +1,379 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Album Archive</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
     <!-- サイドバー PC表示時は左側、モバイルでは下部に表示-->
     <div class="container-fluid">
-        <div class="row">
-			<div class="d-md-none title">
-				<h5 class="text-white px-3 pt-4 pb-3">Album Archive</h5>
-			</div>
-            <div class="col-md-2 sidebar order-2 order-md-1 flex-row text-white">
-				<h5 class="d-none d-md-block px-3 pt-4">Album Archive</h5>
-                <nav>
-                    <!-- Homeリンク -->
-                    <ul class="nav flex-row flex-md-column fw-bold">
-                        <li class="nav-item flex-fill">
-                            <a th:href="@{/AlbumArchive}" class="nav-link d-flex flex-column flex-md-row mt-2" 
-                               th:classappend="${activeTab == 'home' ? 'active-tab' : ''}">
-                               <i class="bi bi-house-door-fill me-md-2"></i>Home
-                            </a>
-                        </li>
+      <div class="row">
+        <div class="d-md-none title">
+          <h5 class="text-white px-3 pt-4 pb-3">Album Archive</h5>
+        </div>
+        <div class="col-md-2 sidebar order-2 order-md-1 flex-row text-white">
+          <h5 class="d-none d-md-block px-3 pt-4">Album Archive</h5>
+          <nav>
+            <!-- Homeリンク -->
+            <ul class="nav flex-row flex-md-column fw-bold">
+              <li class="nav-item flex-fill">
+                <a
+                  th:href="@{/AlbumArchive}"
+                  class="nav-link d-flex flex-column flex-md-row mt-2"
+                  th:classappend="${activeTab == 'home' ? 'active-tab' : ''}"
+                >
+                  <i class="bi bi-house-door-fill me-md-2"></i>Home
+                </a>
+              </li>
 
-                        <!-- Libraryリンク -->
-                        <li class="nav-item flex-fill">
-                            <a th:href="@{/AlbumArchive/library}" class="nav-link d-flex flex-column flex-md-row mt-2" 
-                               th:classappend="${activeTab == 'library' ? 'active-tab' : ''}">
-                               <i class="bi bi-music-note-list me-md-2"></i>Library
-                            </a>
-                        </li>
+              <!-- Libraryリンク -->
+              <li class="nav-item flex-fill">
+                <a
+                  th:href="@{/AlbumArchive/library}"
+                  class="nav-link d-flex flex-column flex-md-row mt-2"
+                  th:classappend="${activeTab == 'library' ? 'active-tab' : ''}"
+                >
+                  <i class="bi bi-music-note-list me-md-2"></i>Library
+                </a>
+              </li>
 
-                        <!-- Addリンク -->
-                        <li class="nav-item flex-fill">
-                            <a th:href="@{/AlbumArchive/add}" class="nav-link d-flex flex-column flex-md-row mt-2" 
-                               th:classappend="${activeTab == 'add' ? 'active-tab' : ''}">
-                               <i class="bi bi-plus-square me-md-2"></i>Add
-                            </a>
-                        </li>
+              <!-- Addリンク -->
+              <li class="nav-item flex-fill">
+                <a
+                  th:href="@{/AlbumArchive/add}"
+                  class="nav-link d-flex flex-column flex-md-row mt-2"
+                  th:classappend="${activeTab == 'add' ? 'active-tab' : ''}"
+                >
+                  <i class="bi bi-plus-square me-md-2"></i>Add
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
 
-                    </ul>
-                </nav>
+        <!--メインコンテンツ-->
+        <div class="col-md-10 main-content order-1 order-md-2 text-white">
+          <div
+            class="d-flex align-items-center justify-content-between pt-4 ps-4 pe-4"
+          >
+            <h1 class="text-white">Library</h1>
+
+            <!-- 並び替えセレクトボックス -->
+            <form
+              th:action="@{/AlbumArchive/library}"
+              method="GET"
+              class="d-flex align-items-center"
+            >
+              <select
+                name="sort"
+                class="form-select-sort"
+                onchange="this.form.submit()"
+              >
+                <option value="newest" th:selected="${sort == 'newest'}">
+                  Newest
+                </option>
+                <option value="oldest" th:selected="${sort == 'oldest'}">
+                  Oldest
+                </option>
+                <option value="rating" th:selected="${sort == 'rating'}">
+                  Top Rated
+                </option>
+              </select>
+            </form>
+          </div>
+
+          <!-- アルバムが編集された時のポップアップ -->
+          <div th:if="${message}">
+            <div
+              class="alert alert-primary d-flex align-items-center fade show alert-fade-in"
+              role="alert"
+            >
+              <i class="bi bi-check-circle-fill me-2"></i>
+              <span th:text="${message}"></span>
+              <hr />
+              <a th:href="@{/AlbumArchive/library}" class="alert-link ps-2"
+                >Back to library</a
+              >
             </div>
+          </div>
 
-			<!--メインコンテンツ-->
-			<div class="col-md-10 main-content order-1 order-md-2 text-white">
+          <!-- アルバム登録確認エリア -->
+          <div class="px-4">
+            <!-- 戻るアイコン -->
+            <a th:href="@{/AlbumArchive/library}" class="back-link">
+              <i class="bi bi-chevron-left"></i>
+            </a>
 
-                
-                <div class="d-flex align-items-center justify-content-between pt-4 ps-4 pe-4">
-				    <h1 class="text-white">Library</h1>
+            <form
+              id="addForm"
+              th:action="@{/AlbumArchive/library/update}"
+              method="POST"
+            >
+              <input type="hidden" name="id" th:value="${album.id}" />
+              <input
+                type="hidden"
+                name="albumName"
+                th:value="${album.albumName}"
+              />
+              <input
+                type="hidden"
+                name="artistName"
+                th:value="${album.artistName}"
+              />
+              <input
+                type="hidden"
+                name="imageUrl"
+                th:value="${album.imageUrl}"
+              />
 
-                     <!-- 並び替えセレクトボックス -->
-                       <form th:action="@{/AlbumArchive/library}" method="GET" class="d-flex align-items-center">
-                        <select name="sort" class="form-select-sort" onchange="this.form.submit()">
-                                <option value="newest" th:selected="${sort == 'newest'}">Newest</option>
-                                <option value="oldest" th:selected="${sort == 'oldest'}">Oldest</option>
-                                <option value="rating" th:selected="${sort == 'rating'}">Top Rated</option>
-                            </select>
-                       </form>
+              <div class="row align-content-center d-flex pt-5">
+                <div class="col-lg-4">
+                  <!-- アルバム画像取得 -->
+                  <img
+                    th:src="${album.imageUrl}"
+                    class="rounded-3 img-fluid mb-2"
+                    alt="Album Jacket"
+                    style="aspect-ratio: 1 / 1; object-fit: cover"
+                  />
+                  <h3 th:text="${album.albumName}">AlbumName</h3>
+                  <h4 th:text="${album.artistName}">ArtistName</h4>
                 </div>
 
-                <!-- アルバムが編集された時のポップアップ -->
-                         <div th:if="${message}">
-                            <div class="alert alert-primary d-flex align-items-center fade show alert-fade-in" role="alert">
-                                <i class="bi bi-check-circle-fill me-2"></i>
-                                <span th:text="${message}"></span>
-                                <hr>
-                                <a th:href="@{/AlbumArchive/library}" class="alert-link ps-2">Back to library</a>
-                            </div> 
-                         </div>
-
-                <!-- アルバム登録確認エリア -->
-                    <div class="px-4">
-                        <!-- 戻るアイコン -->
-                        <a th:href="@{/AlbumArchive/library}" class="back-link">
-                        <i class="bi bi-chevron-left"></i></a>
-
-                        <form id="addForm" th:action="@{/AlbumArchive/library/update}" method="POST">
-                            <input type="hidden" name="id" th:value="${album.id}">
-                            <input type="hidden" name="albumName" th:value="${album.albumName}">
-                            <input type="hidden" name="artistName" th:value="${album.artistName}">
-                            <input type="hidden" name="imageUrl" th:value="${album.imageUrl}">
-
-
-                        <div class="row align-content-center d-flex pt-5"><div class="col-md-auto">
-                            
-                    <!-- アルバム画像取得 -->
-                     <img th:src="${album.imageUrl}"
-                                     class="rounded-3 mb-2"
-                                     alt="Album Jacket"
-                                     style="aspect-ratio: 1 / 1; object-fit: cover;">
-                            <h3 th:text="${album.albumName}">AlbumName</h3>
-                            <h4 th:text="${album.artistName}">ArtistName</h4>
+                <!-- 星評価 -->
+                <div class="col-md">
+                  <div class="rating-container">
+                    <h4>Rating</h4>
+                    <div class="star-rating">
+                      <input
+                        type="radio"
+                        id="star5"
+                        name="rating"
+                        value="5"
+                        th:checked="${album.rating == 5}"
+                      /><label for="star5"></label>
+                      <input
+                        type="radio"
+                        id="star4"
+                        name="rating"
+                        value="4"
+                        th:checked="${album.rating == 4}"
+                      /><label for="star4"></label>
+                      <input
+                        type="radio"
+                        id="star3"
+                        name="rating"
+                        value="3"
+                        th:checked="${album.rating == 3}"
+                      /><label for="star3"></label>
+                      <input
+                        type="radio"
+                        id="star2"
+                        name="rating"
+                        value="2"
+                        th:checked="${album.rating == 2}"
+                      /><label for="star2"></label>
+                      <input
+                        type="radio"
+                        id="star1"
+                        name="rating"
+                        value="1"
+                        th:checked="${album.rating == 1}"
+                      /><label for="star1"></label>
                     </div>
+                  </div>
 
-                        <!-- 星評価 -->
-                        <div class="col-md">
-                        <div class="rating-container">
-                            <h4>Rating</h4>
-                            <div class="star-rating">
-                                <input type="radio" id="star5" name="rating" value="5" th:checked="${album.rating == 5}"><label for="star5"></label>
-                                <input type="radio" id="star4" name="rating" value="4" th:checked="${album.rating == 4}"><label for="star4"></label>
-                                <input type="radio" id="star3" name="rating" value="3" th:checked="${album.rating == 3}"><label for="star3"></label>
-                                <input type="radio" id="star2" name="rating" value="2" th:checked="${album.rating == 2}"><label for="star2"></label>
-                                <input type="radio" id="star1" name="rating" value="1" th:checked="${album.rating == 1}"><label for="star1"></label>
-                            </div>
-                        </div>
+                  <!-- ジャンル -->
+                  <div class="mt-4">
+                    <h4>Genres</h4>
+                    <div class="genre-group">
+                      <input
+                        type="checkbox"
+                        id="genre1"
+                        name="genres"
+                        value="Ambient"
+                        th:checked="${#lists.contains(genres, 'Ambient')}"
+                      /><label for="genre1">#Ambient</label>
+                      <input
+                        type="checkbox"
+                        id="genre2"
+                        name="genres"
+                        value="Blues"
+                        th:checked="${#lists.contains(genres, 'Blues')}"
+                      /><label for="genre2">#Blues</label>
+                      <input
+                        type="checkbox"
+                        id="genre3"
+                        name="genres"
+                        value="Classical"
+                        th:checked="${#lists.contains(genres, 'Classical')}"
+                      /><label for="genre3">#Classical</label>
+                      <input
+                        type="checkbox"
+                        id="genre4"
+                        name="genres"
+                        value="Country"
+                        th:checked="${#lists.contains(genres, 'Country')}"
+                      /><label for="genre4">#Country</label>
+                      <input
+                        type="checkbox"
+                        id="genre5"
+                        name="genres"
+                        value="Dance"
+                        th:checked="${#lists.contains(genres, 'Dance')}"
+                      /><label for="genre5">#Dance</label>
+                      <input
+                        type="checkbox"
+                        id="genre6"
+                        name="genres"
+                        value="Electronic"
+                        th:checked="${#lists.contains(genres, 'Electronic')}"
+                      /><label for="genre6">#Electronic</label>
+                      <input
+                        type="checkbox"
+                        id="genre7"
+                        name="genres"
+                        value="Entertainment"
+                        th:checked="${#lists.contains(genres, 'Entertainment')}"
+                      /><label for="genre7">#Entertainment</label>
+                      <input
+                        type="checkbox"
+                        id="genre8"
+                        name="genres"
+                        value="Experimental"
+                        th:checked="${#lists.contains(genres, 'Experimental')}"
+                      /><label for="genre8">#Experimental</label>
+                      <input
+                        type="checkbox"
+                        id="genre9"
+                        name="genres"
+                        value="Folk"
+                        th:checked="${#lists.contains(genres, 'Folk')}"
+                      /><label for="genre9">#Folk</label>
+                      <input
+                        type="checkbox"
+                        id="genre10"
+                        name="genres"
+                        value="HipHop"
+                        th:checked="${#lists.contains(genres, 'HipHop')}"
+                      /><label for="genre10">#HipHop</label>
+                      <input
+                        type="checkbox"
+                        id="genre11"
+                        name="genres"
+                        value="Industrial"
+                        th:checked="${#lists.contains(genres, 'Industrial')}"
+                      /><label for="genre11">#Industrial</label>
+                      <input
+                        type="checkbox"
+                        id="genre12"
+                        name="genres"
+                        value="Jazz"
+                        th:checked="${#lists.contains(genres, 'Jazz')}"
+                      /><label for="genre12">#Jazz</label>
+                      <input
+                        type="checkbox"
+                        id="genre13"
+                        name="genres"
+                        value="Metal"
+                        th:checked="${#lists.contains(genres, 'Metal')}"
+                      /><label for="genre13">#Metal</label>
+                      <input
+                        type="checkbox"
+                        id="genre14"
+                        name="genres"
+                        value="Pop"
+                        th:checked="${#lists.contains(genres, 'Pop')}"
+                      /><label for="genre14">#Pop</label>
+                      <input
+                        type="checkbox"
+                        id="genre15"
+                        name="genres"
+                        value="Punk"
+                        th:checked="${#lists.contains(genres, 'Punk')}"
+                      /><label for="genre15">#Punk</label>
+                      <input
+                        type="checkbox"
+                        id="genre16"
+                        name="genres"
+                        value="R&B"
+                        th:checked="${#lists.contains(genres, 'R&B')}"
+                      /><label for="genre16">#R&B</label>
+                      <input
+                        type="checkbox"
+                        id="genre17"
+                        name="genres"
+                        value="Reggae"
+                        th:checked="${#lists.contains(genres, 'Reggae')}"
+                      /><label for="genre17">#Reggae</label>
+                      <input
+                        type="checkbox"
+                        id="genre18"
+                        name="genres"
+                        value="Rock"
+                        th:checked="${#lists.contains(genres, 'Rock')}"
+                      /><label for="genre18">#Rock</label>
+                      <input
+                        type="checkbox"
+                        id="genre19"
+                        name="genres"
+                        value="Ska"
+                        th:checked="${#lists.contains(genres, 'Ska')}"
+                      /><label for="genre19">#Ska</label>
+                    </div>
+                  </div>
 
-                        <!-- ジャンル -->
-                        <div class="mt-4">
-                            <h4>Genres</h4>
-                            <div class="genre-group">
-                            <input type="checkbox" id="genre1" name="genres" value="Ambient" th:checked="${#lists.contains(genres, 'Ambient')}"><label for="genre1">#Ambient</label>
-                            <input type="checkbox" id="genre2" name="genres" value="Blues" th:checked="${#lists.contains(genres, 'Blues')}"><label for="genre2">#Blues</label>
-                            <input type="checkbox" id="genre3" name="genres" value="Classical" th:checked="${#lists.contains(genres, 'Classical')}"><label for="genre3">#Classical</label>
-                            <input type="checkbox" id="genre4" name="genres" value="Country" th:checked="${#lists.contains(genres, 'Country')}"><label for="genre4">#Country</label>
-                            <input type="checkbox" id="genre5" name="genres" value="Dance" th:checked="${#lists.contains(genres, 'Dance')}"><label for="genre5">#Dance</label>
-                            <input type="checkbox" id="genre6" name="genres" value="Electronic" th:checked="${#lists.contains(genres, 'Electronic')}"><label for="genre6">#Electronic</label>
-                            <input type="checkbox" id="genre7" name="genres" value="Entertainment" th:checked="${#lists.contains(genres, 'Entertainment')}"><label for="genre7">#Entertainment</label>
-                            <input type="checkbox" id="genre8" name="genres" value="Experimental" th:checked="${#lists.contains(genres, 'Experimental')}"><label for="genre8">#Experimental</label>
-                            <input type="checkbox" id="genre9" name="genres" value="Folk" th:checked="${#lists.contains(genres, 'Folk')}"><label for="genre9">#Folk</label>
-                            <input type="checkbox" id="genre10" name="genres" value="HipHop" th:checked="${#lists.contains(genres, 'HipHop')}"><label for="genre10">#HipHop</label>
-                            <input type="checkbox" id="genre11" name="genres" value="Industrial" th:checked="${#lists.contains(genres, 'Industrial')}"><label for="genre11">#Industrial</label>
-                            <input type="checkbox" id="genre12" name="genres" value="Jazz" th:checked="${#lists.contains(genres, 'Jazz')}"><label for="genre12">#Jazz</label>
-                            <input type="checkbox" id="genre13" name="genres" value="Metal" th:checked="${#lists.contains(genres, 'Metal')}"><label for="genre13">#Metal</label>
-                            <input type="checkbox" id="genre14" name="genres" value="Pop" th:checked="${#lists.contains(genres, 'Pop')}"><label for="genre14">#Pop</label>
-                            <input type="checkbox" id="genre15" name="genres" value="Punk" th:checked="${#lists.contains(genres, 'Punk')}"><label for="genre15">#Punk</label>
-                            <input type="checkbox" id="genre16" name="genres" value="R&B" th:checked="${#lists.contains(genres, 'R&B')}"><label for="genre16">#R&B</label>
-                            <input type="checkbox" id="genre17" name="genres" value="Reggae" th:checked="${#lists.contains(genres, 'Reggae')}"><label for="genre17">#Reggae</label>
-                            <input type="checkbox" id="genre18" name="genres" value="Rock" th:checked="${#lists.contains(genres, 'Rock')}"><label for="genre18">#Rock</label>
-                            <input type="checkbox" id="genre19" name="genres" value="Ska" th:checked="${#lists.contains(genres, 'Ska')}"><label for="genre19">#Ska</label>
-                            </div>
-                        </div>
+                  <!-- メモ -->
+                  <div class="mt-4">
+                    <h4>Memo</h4>
+                    <div class="memo-group">
+                      <textarea
+                        id="memo"
+                        name="memo"
+                        rows="6"
+                        placeholder="Write Free"
+                        th:text="${album.memo}"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
 
-                        <!-- メモ -->
-                         <div class="mt-4">
-                            <h4>Memo</h4>
-                                <div class="memo-group">
-                                <textarea id="memo" name="memo" rows="6" placeholder="Write Free" th:text="${album.memo}"></textarea>
-                            </div>
-                         </div>
-                         </form>
+            <!-- ボタンコンテナ -->
+            <div class="d-flex justify-content-end gap-2 mt-4 pe-4">
+              <!-- 削除フォーム -->
+              <form
+                th:action="@{/AlbumArchive/library/delete}"
+                method="POST"
+                onsubmit="
+                  return confirm('Are you sure you want to delete this album?');
+                "
+              >
+                <input type="hidden" name="id" th:value="${album.id}" />
+                <button type="submit" class="btn btn-outline-danger">
+                  <i class="bi bi-trash me-2"></i>Delete
+                </button>
+              </form>
 
-                        <div class="justify-content-end align-items-center d-flex">
-
-                            <!-- 削除ボタン -->
-                            <form th:action="@{/AlbumArchive/library/delete}" method="POST"
-                                  onsubmit="return confirm('Are you sure you want to delete this album?');">
-                                <input type="hidden" name="id" th:value="${album.id}">
-                                <button type="submit" class="btn btn-outline-danger me-2">
-                                    <i class="bi bi-trash me-2"></i>Delete
-                                </button>
-                            </form>
-
-                            <!-- 送信ボタン -->
-                            <button type="submit" form="addForm" class="btn btn-primary me-2">
-                                <i class="bi bi-pencil-square me-2"></i>Edit
-                            </button>
-                        </div>
-                        </div>
-
-                        </div>
-			        </div>
-		    </div>
-	    </div>
+              <!-- Editボタン -->
+              <button type="submit" form="addForm" class="btn btn-primary">
+                <i class="bi bi-pencil-square me-2"></i>Edit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-</body>
+  </body>
 </html>

@@ -1,4 +1,5 @@
 package com.albumarchive.controller;
+
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -18,18 +19,18 @@ public class HomeController {
 
 	private final AlbumService albumService;
 
-	//ホーム画面表示
+	// ホーム画面表示
 	@GetMapping("/AlbumArchive")
 	public String showHome(Model model) {
-		
+
 		List<Album> recentAlbums = albumService.getRecentAlbums();
 		List<ArtistRankingDto> top3Artists = albumService.getTop3Artists();
 		List<GenreRankingDto> top3Genres = albumService.getTop3Genres();
-		
+
 		model.addAttribute("myAlbums", recentAlbums);
 		model.addAttribute("top3Artists", top3Artists);
 		model.addAttribute("top3Genres", top3Genres);
-		model.addAttribute("activeTab", "home");		
+		model.addAttribute("activeTab", "home");
 		return "home";
 	}
 }
