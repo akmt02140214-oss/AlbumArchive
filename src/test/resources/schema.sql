@@ -8,7 +8,7 @@ CREATE TABLE albums (
     image_url VARCHAR(500),
     rating INT,
     memo TEXT,
-    register_date DATETIME
+    register_date TIMESTAMP
 );
 
 CREATE TABLE album_genres (
