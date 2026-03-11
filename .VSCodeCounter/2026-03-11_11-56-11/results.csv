@@ -1,0 +1,44 @@
+"filename", "language", "YAML", "XML", "MS SQL", "Java Properties", "Markdown", "Batch", "HTML", "Java", "PostCSS", "comment", "blank", "total"
+"c:\AlbumArchive\AlbumArchive\.mvn\wrapper\maven-wrapper.properties", "Java Properties", 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 1, 4
+"c:\AlbumArchive\AlbumArchive\README.md", "Markdown", 0, 0, 0, 0, 53, 0, 0, 0, 0, 0, 18, 71
+"c:\AlbumArchive\AlbumArchive\docker-compose.yml", "YAML", 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15
+"c:\AlbumArchive\AlbumArchive\mvnw.cmd", "Batch", 0, 0, 0, 0, 0, 139, 0, 0, 0, 26, 25, 190
+"c:\AlbumArchive\AlbumArchive\pom.xml", "XML", 0, 124, 0, 0, 0, 0, 0, 0, 0, 0, 5, 129
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\AlbumArchiveApplication.java", "Java", 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 5, 14
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\config\RestClientConfig.java", "Java", 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 5, 16
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\controller\AddController.java", "Java", 0, 0, 0, 0, 0, 0, 0, 55, 0, 4, 14, 73
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\controller\HomeController.java", "Java", 0, 0, 0, 0, 0, 0, 0, 26, 0, 1, 10, 37
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\controller\LibraryController.java", "Java", 0, 0, 0, 0, 0, 0, 0, 54, 0, 4, 24, 82
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\dto\AlbumDto.java", "Java", 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 10, 36
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\dto\ArtistRankingDto.java", "Java", 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 3, 10
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\dto\GenreRankingDto.java", "Java", 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 3, 10
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\dto\TopAlbumResponse.java", "Java", 0, 0, 0, 0, 0, 0, 0, 11, 0, 10, 9, 30
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\entity\Album.java", "Java", 0, 0, 0, 0, 0, 0, 0, 17, 0, 1, 7, 25
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\entity\AlbumForm.java", "Java", 0, 0, 0, 0, 0, 0, 0, 14, 0, 1, 7, 22
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\entity\AlbumGenre.java", "Java", 0, 0, 0, 0, 0, 0, 0, 12, 0, 1, 6, 19
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\repository\AlbumRepository.java", "Java", 0, 0, 0, 0, 0, 0, 0, 20, 0, 12, 16, 48
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\repository\AlbumRepositoryImpl.java", "Java", 0, 0, 0, 0, 0, 0, 0, 142, 0, 20, 50, 212
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\repository\GenreRepository.java", "Java", 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 4, 9
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\repository\GenreRepositoryImpl.java", "Java", 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 7, 22
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\service\AlbumService.java", "Java", 0, 0, 0, 0, 0, 0, 0, 19, 0, 11, 15, 45
+"c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\service\AlbumServiceImpl.java", "Java", 0, 0, 0, 0, 0, 0, 0, 101, 0, 7, 32, 140
+"c:\AlbumArchive\AlbumArchive\src\main\resources\application.properties", "Java Properties", 0, 0, 0, 9, 0, 0, 0, 0, 0, 5, 6, 20
+"c:\AlbumArchive\AlbumArchive\src\main\resources\schema.sql", "MS SQL", 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 3, 20
+"c:\AlbumArchive\AlbumArchive\src\main\resources\static\css\style.css", "PostCSS", 0, 0, 0, 0, 0, 0, 0, 0, 210, 9, 15, 234
+"c:\AlbumArchive\AlbumArchive\src\main\resources\templates\add-confirm.html", "HTML", 0, 0, 0, 0, 0, 0, 300, 0, 0, 13, 13, 326
+"c:\AlbumArchive\AlbumArchive\src\main\resources\templates\add.html", "HTML", 0, 0, 0, 0, 0, 0, 81, 0, 0, 12, 11, 104
+"c:\AlbumArchive\AlbumArchive\src\main\resources\templates\edit.html", "HTML", 0, 0, 0, 0, 0, 0, 61, 0, 0, 2, 3, 66
+"c:\AlbumArchive\AlbumArchive\src\main\resources\templates\error.html", "HTML", 0, 0, 0, 0, 0, 0, 60, 0, 0, 2, 4, 66
+"c:\AlbumArchive\AlbumArchive\src\main\resources\templates\home.html", "HTML", 0, 0, 0, 0, 0, 0, 151, 0, 0, 11, 9, 171
+"c:\AlbumArchive\AlbumArchive\src\main\resources\templates\library-details.html", "HTML", 0, 0, 0, 0, 0, 0, 350, 0, 0, 16, 14, 380
+"c:\AlbumArchive\AlbumArchive\src\main\resources\templates\library.html", "HTML", 0, 0, 0, 0, 0, 0, 89, 0, 0, 12, 15, 116
+"c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\AlbumArchiveApplicationTests.java", "Java", 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 5, 14
+"c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\controller\AddControllerTest.java", "Java", 0, 0, 0, 0, 0, 0, 0, 101, 0, 9, 30, 140
+"c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\controller\HomeControllerTest.java", "Java", 0, 0, 0, 0, 0, 0, 0, 40, 0, 2, 13, 55
+"c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\controller\LibraryControllerTest.java", "Java", 0, 0, 0, 0, 0, 0, 0, 100, 0, 10, 31, 141
+"c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\dto\AlbumDtoTest.java", "Java", 0, 0, 0, 0, 0, 0, 0, 23, 0, 6, 11, 40
+"c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\repository\AlbumRepositoryImplTest.java", "Java", 0, 0, 0, 0, 0, 0, 0, 213, 0, 36, 78, 327
+"c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\service\AlbumServiceImplTest.java", "Java", 0, 0, 0, 0, 0, 0, 0, 183, 0, 39, 68, 290
+"c:\AlbumArchive\AlbumArchive\src\test\resources\application.properties", "Java Properties", 0, 0, 0, 10, 0, 0, 0, 0, 0, 3, 6, 19
+"c:\AlbumArchive\AlbumArchive\src\test\resources\schema.sql", "MS SQL", 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 3, 20
+"Total", "-", 15, 124, 34, 22, 53, 139, 1092, 1220, 210, 285, 614, 3808

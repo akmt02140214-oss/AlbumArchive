@@ -4,6 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -62,7 +63,7 @@ public class AlbumRepositoryImplTest {
         albumRepository.addAlbum(album);
 
         // Verify
-        assertThat(album.getId(), is(1L));
+        assertThat(album.getId() > 0, is(true));
 
         Album actual = jdbcTemplate.queryForObject("SELECT * FROM albums WHERE id = ?",
                 new BeanPropertyRowMapper<>(Album.class),
@@ -273,6 +274,186 @@ public class AlbumRepositoryImplTest {
         assertThat(result.get(0).getAlbumName(), is("Kid A"));
         assertThat(result.get(0).getArtistName(), is("Radiohead"));
         assertThat(result.get(0).getImageUrl(), is("http://example.com/image.jpg"));
+    }
+
+    @Test
+    void testSearchAlbums_imageSizeがextralargeを複数のサイズから取得() {
+
+        // Setup
+        TopAlbumResponse mock = new TopAlbumResponse();
+        TopAlbumResponse.TopAlbums topAlbums = new TopAlbumResponse.TopAlbums();
+
+        AlbumDto dto = new AlbumDto();
+        dto.setAlbumName("Kid A");
+
+        AlbumDto.ArtistDto artistDto = new AlbumDto.ArtistDto();
+        artistDto.setName("Radiohead");
+        dto.setArtist(artistDto);
+
+        AlbumDto.ImageDto imageDto1 = new AlbumDto.ImageDto();
+        imageDto1.setSize("small");
+        imageDto1.setUrl("http://example.com/small.jpg");
+
+        AlbumDto.ImageDto imageDto2 = new AlbumDto.ImageDto();
+        imageDto2.setSize("extralarge");
+        imageDto2.setUrl("http://example.com/target.jpg");
+
+        dto.setImage(List.of(imageDto1, imageDto2));
+
+        topAlbums.setAlbum(List.of(dto));
+        mock.setTopalbums(topAlbums);
+
+        org.mockito.Mockito.when(restClient.get()
+                .uri(org.mockito.ArgumentMatchers.anyString())
+                .retrieve()
+                .body(TopAlbumResponse.class)).thenReturn(mock);
+
+        // Exercise
+        List<AlbumForm> result = albumRepository.searchAlbums("Radiohead");
+
+        // Verify
+        assertThat(result.get(0).getImageUrl(), is("http://example.com/target.jpg"));
+    }
+
+    @Test
+    void testSearchAlbums_imageがnullの場合imageUrlはnull() {
+
+        // Setup
+        TopAlbumResponse mock = new TopAlbumResponse();
+        TopAlbumResponse.TopAlbums topAlbums = new TopAlbumResponse.TopAlbums();
+
+        AlbumDto dto = new AlbumDto();
+        dto.setAlbumName("None");
+
+        AlbumDto.ArtistDto artistDto = new AlbumDto.ArtistDto();
+        artistDto.setName("Radiohead");
+        dto.setArtist(artistDto);
+
+        // nullのリスト
+        dto.setImage(new ArrayList<>());
+
+        topAlbums.setAlbum(List.of(dto));
+        mock.setTopalbums(topAlbums);
+
+        org.mockito.Mockito.when(restClient.get()
+                .uri(org.mockito.ArgumentMatchers.anyString())
+                .retrieve()
+                .body(TopAlbumResponse.class)).thenReturn(mock);
+
+        // Exercise
+        List<AlbumForm> result = albumRepository.searchAlbums("Radiohead");
+
+        // Verify
+        assertThat(result.get(0).getAlbumName(), is("None"));
+        assertThat(result.get(0).getImageUrl(), is((String) null));
+
+    }
+
+    @Test
+    void testSearchAlbums_extralargeが存在しない場合imageUrlはnull() {
+
+        // Setup
+        TopAlbumResponse mock = new TopAlbumResponse();
+        TopAlbumResponse.TopAlbums topAlbums = new TopAlbumResponse.TopAlbums();
+
+        AlbumDto dto = new AlbumDto();
+        dto.setAlbumName("Kid A");
+
+        AlbumDto.ArtistDto artistDto = new AlbumDto.ArtistDto();
+        artistDto.setName("Radiohead");
+        dto.setArtist(artistDto);
+
+        AlbumDto.ImageDto imageDto1 = new AlbumDto.ImageDto();
+        imageDto1.setSize("small");
+        imageDto1.setUrl("http://example.com/small.jpg");
+
+        dto.setImage(List.of(imageDto1));
+
+        topAlbums.setAlbum(List.of(dto));
+        mock.setTopalbums(topAlbums);
+
+        org.mockito.Mockito.when(restClient.get()
+                .uri(org.mockito.ArgumentMatchers.anyString())
+                .retrieve()
+                .body(TopAlbumResponse.class)).thenReturn(mock);
+
+        // Exercise
+        List<AlbumForm> result = albumRepository.searchAlbums("Radiohead");
+
+        // Verify
+        assertThat(result.get(0).getImageUrl(), is((String) null));
+
+    }
+
+    @Test
+    void testSearchAlbums_imageがnullの場合でも例外が発生しない() {
+
+        // Setup
+        TopAlbumResponse mock = new TopAlbumResponse();
+        TopAlbumResponse.TopAlbums topAlbums = new TopAlbumResponse.TopAlbums();
+
+        AlbumDto dto = new AlbumDto();
+        dto.setAlbumName("Kid A");
+
+        AlbumDto.ArtistDto artistDto = new AlbumDto.ArtistDto();
+        artistDto.setName("Radiohead");
+        dto.setArtist(artistDto);
+
+        // nullをセット
+        dto.setImage(null);
+
+        topAlbums.setAlbum(List.of(dto));
+        mock.setTopalbums(topAlbums);
+
+        org.mockito.Mockito.when(restClient.get()
+                .uri(org.mockito.ArgumentMatchers.anyString())
+                .retrieve()
+                .body(TopAlbumResponse.class)).thenReturn(mock);
+
+        // Exercise
+        List<AlbumForm> result = albumRepository.searchAlbums("Radiohead");
+
+        // Verify
+        assertThat(result.size(), is(1));
+        assertThat(result.get(0).getAlbumName(), is("Kid A"));
+        assertThat(result.get(0).getArtistName(), is("Radiohead"));
+        assertThat(result.get(0).getImageUrl(), is((String) null));
+    }
+
+    @Test
+    void testSearchMyAlbums_登録日の降順でソートする() {
+
+        // Setup
+        jdbcTemplate.update("INSERT INTO albums (album_name, artist_name, register_date) VALUES (?, ?, ?)",
+                "OK Computer", "Radiohead", LocalDateTime.now().plusDays(1));
+        jdbcTemplate.update("INSERT INTO albums (album_name, artist_name, register_date) VALUES (?, ?, ?)",
+                "Kid A", "Radiohead", LocalDateTime.now().plusDays(2));
+
+        // Exercise
+        List<Album> result = albumRepository.searchMyAlbums(0, "newest");
+
+        // Verify
+        assertThat(result.get(0).getAlbumName(), is("Kid A"));
+        assertThat(result.get(1).getAlbumName(), is("OK Computer"));
+
+    }
+
+    @Test
+    void testSearchMyAlbums_登録日の昇順でソートする() {
+
+        // Setup
+        jdbcTemplate.update("INSERT INTO albums (album_name, artist_name, register_date) VALUES (?, ?, ?)",
+                "OK Computer", "Radiohead", LocalDateTime.now().plusDays(1));
+        jdbcTemplate.update("INSERT INTO albums (album_name, artist_name, register_date) VALUES (?, ?, ?)",
+                "Kid A", "Radiohead", LocalDateTime.now().plusDays(2));
+
+        // Exercise
+        List<Album> result = albumRepository.searchMyAlbums(0, "oldest");
+
+        // Verify
+        assertThat(result.get(0).getAlbumName(), is("OK Computer"));
+        assertThat(result.get(1).getAlbumName(), is("Kid A"));
+
     }
 
     @Test

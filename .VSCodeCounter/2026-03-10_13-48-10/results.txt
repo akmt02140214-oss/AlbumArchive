@@ -1,0 +1,104 @@
+Date : 2026-03-10 13:48:10
+Directory : c:\AlbumArchive\AlbumArchive
+Total : 42 files,  2909 codes, 285 comments, 614 blanks, all 3808 lines
+
+Languages
++-----------------+------------+------------+------------+------------+------------+
+| language        | files      | code       | comment    | blank      | total      |
++-----------------+------------+------------+------------+------------+------------+
+| Java            |         25 |      1,220 |        174 |        463 |      1,857 |
+| HTML            |          7 |      1,092 |         68 |         69 |      1,229 |
+| PostCSS         |          1 |        210 |          9 |         15 |        234 |
+| Batch           |          1 |        139 |         26 |         25 |        190 |
+| XML             |          1 |        124 |          0 |          5 |        129 |
+| Markdown        |          1 |         53 |          0 |         18 |         71 |
+| MS SQL          |          2 |         34 |          0 |          6 |         40 |
+| Java Properties |          3 |         22 |          8 |         13 |         43 |
+| YAML            |          1 |         15 |          0 |          0 |         15 |
++-----------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                   |         42 |      2,909 |        285 |        614 |      3,808 |
+| . (Files)                                                                                           |          4 |        331 |         26 |         48 |        405 |
+| .mvn                                                                                                |          1 |          3 |          0 |          1 |          4 |
+| .mvn\wrapper                                                                                        |          1 |          3 |          0 |          1 |          4 |
+| src                                                                                                 |         37 |      2,575 |        259 |        565 |      3,399 |
+| src\main                                                                                            |         28 |      1,879 |        154 |        320 |      2,353 |
+| src\main\java                                                                                       |         18 |        551 |         72 |        227 |        850 |
+| src\main\java\com                                                                                   |         18 |        551 |         72 |        227 |        850 |
+| src\main\java\com\albumarchive                                                                      |         18 |        551 |         72 |        227 |        850 |
+| src\main\java\com\albumarchive (Files)                                                              |          1 |          9 |          0 |          5 |         14 |
+| src\main\java\com\albumarchive\config                                                               |          1 |         11 |          0 |          5 |         16 |
+| src\main\java\com\albumarchive\controller                                                           |          3 |        135 |          9 |         48 |        192 |
+| src\main\java\com\albumarchive\dto                                                                  |          4 |         51 |         10 |         25 |         86 |
+| src\main\java\com\albumarchive\entity                                                               |          3 |         43 |          3 |         20 |         66 |
+| src\main\java\com\albumarchive\repository                                                           |          4 |        182 |         32 |         77 |        291 |
+| src\main\java\com\albumarchive\service                                                              |          2 |        120 |         18 |         47 |        185 |
+| src\main\resources                                                                                  |         10 |      1,328 |         82 |         93 |      1,503 |
+| src\main\resources (Files)                                                                          |          2 |         26 |          5 |          9 |         40 |
+| src\main\resources\static                                                                           |          1 |        210 |          9 |         15 |        234 |
+| src\main\resources\static\css                                                                       |          1 |        210 |          9 |         15 |        234 |
+| src\main\resources\templates                                                                        |          7 |      1,092 |         68 |         69 |      1,229 |
+| src\test                                                                                            |          9 |        696 |        105 |        245 |      1,046 |
+| src\test\java                                                                                       |          7 |        669 |        102 |        236 |      1,007 |
+| src\test\java\com                                                                                   |          7 |        669 |        102 |        236 |      1,007 |
+| src\test\java\com\albumarchive                                                                      |          7 |        669 |        102 |        236 |      1,007 |
+| src\test\java\com\albumarchive (Files)                                                              |          1 |          9 |          0 |          5 |         14 |
+| src\test\java\com\albumarchive\controller                                                           |          3 |        241 |         21 |         74 |        336 |
+| src\test\java\com\albumarchive\dto                                                                  |          1 |         23 |          6 |         11 |         40 |
+| src\test\java\com\albumarchive\repository                                                           |          1 |        213 |         36 |         78 |        327 |
+| src\test\java\com\albumarchive\service                                                              |          1 |        183 |         39 |         68 |        290 |
+| src\test\resources                                                                                  |          2 |         27 |          3 |          9 |         39 |
++-----------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| filename                                                                                            | language        | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
+| c:\AlbumArchive\AlbumArchive\.mvn\wrapper\maven-wrapper.properties                                  | Java Properties |          3 |          0 |          1 |          4 |
+| c:\AlbumArchive\AlbumArchive\README.md                                                              | Markdown        |         53 |          0 |         18 |         71 |
+| c:\AlbumArchive\AlbumArchive\docker-compose.yml                                                     | YAML            |         15 |          0 |          0 |         15 |
+| c:\AlbumArchive\AlbumArchive\mvnw.cmd                                                               | Batch           |        139 |         26 |         25 |        190 |
+| c:\AlbumArchive\AlbumArchive\pom.xml                                                                | XML             |        124 |          0 |          5 |        129 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\AlbumArchiveApplication.java            | Java            |          9 |          0 |          5 |         14 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\config\RestClientConfig.java            | Java            |         11 |          0 |          5 |         16 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\controller\AddController.java           | Java            |         55 |          4 |         14 |         73 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\controller\HomeController.java          | Java            |         26 |          1 |         10 |         37 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\controller\LibraryController.java       | Java            |         54 |          4 |         24 |         82 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\dto\AlbumDto.java                       | Java            |         26 |          0 |         10 |         36 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\dto\ArtistRankingDto.java               | Java            |          7 |          0 |          3 |         10 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\dto\GenreRankingDto.java                | Java            |          7 |          0 |          3 |         10 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\dto\TopAlbumResponse.java               | Java            |         11 |         10 |          9 |         30 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\entity\Album.java                       | Java            |         17 |          1 |          7 |         25 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\entity\AlbumForm.java                   | Java            |         14 |          1 |          7 |         22 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\entity\AlbumGenre.java                  | Java            |         12 |          1 |          6 |         19 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\repository\AlbumRepository.java         | Java            |         20 |         12 |         16 |         48 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\repository\AlbumRepositoryImpl.java     | Java            |        142 |         20 |         50 |        212 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\repository\GenreRepository.java         | Java            |          5 |          0 |          4 |          9 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\repository\GenreRepositoryImpl.java     | Java            |         15 |          0 |          7 |         22 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\service\AlbumService.java               | Java            |         19 |         11 |         15 |         45 |
+| c:\AlbumArchive\AlbumArchive\src\main\java\com\albumarchive\service\AlbumServiceImpl.java           | Java            |        101 |          7 |         32 |        140 |
+| c:\AlbumArchive\AlbumArchive\src\main\resources\application.properties                              | Java Properties |          9 |          5 |          6 |         20 |
+| c:\AlbumArchive\AlbumArchive\src\main\resources\schema.sql                                          | MS SQL          |         17 |          0 |          3 |         20 |
+| c:\AlbumArchive\AlbumArchive\src\main\resources\static\css\style.css                                | PostCSS         |        210 |          9 |         15 |        234 |
+| c:\AlbumArchive\AlbumArchive\src\main\resources\templates\add-confirm.html                          | HTML            |        300 |         13 |         13 |        326 |
+| c:\AlbumArchive\AlbumArchive\src\main\resources\templates\add.html                                  | HTML            |         81 |         12 |         11 |        104 |
+| c:\AlbumArchive\AlbumArchive\src\main\resources\templates\edit.html                                 | HTML            |         61 |          2 |          3 |         66 |
+| c:\AlbumArchive\AlbumArchive\src\main\resources\templates\error.html                                | HTML            |         60 |          2 |          4 |         66 |
+| c:\AlbumArchive\AlbumArchive\src\main\resources\templates\home.html                                 | HTML            |        151 |         11 |          9 |        171 |
+| c:\AlbumArchive\AlbumArchive\src\main\resources\templates\library-details.html                      | HTML            |        350 |         16 |         14 |        380 |
+| c:\AlbumArchive\AlbumArchive\src\main\resources\templates\library.html                              | HTML            |         89 |         12 |         15 |        116 |
+| c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\AlbumArchiveApplicationTests.java       | Java            |          9 |          0 |          5 |         14 |
+| c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\controller\AddControllerTest.java       | Java            |        101 |          9 |         30 |        140 |
+| c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\controller\HomeControllerTest.java      | Java            |         40 |          2 |         13 |         55 |
+| c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\controller\LibraryControllerTest.java   | Java            |        100 |         10 |         31 |        141 |
+| c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\dto\AlbumDtoTest.java                   | Java            |         23 |          6 |         11 |         40 |
+| c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\repository\AlbumRepositoryImplTest.java | Java            |        213 |         36 |         78 |        327 |
+| c:\AlbumArchive\AlbumArchive\src\test\java\com\albumarchive\service\AlbumServiceImplTest.java       | Java            |        183 |         39 |         68 |        290 |
+| c:\AlbumArchive\AlbumArchive\src\test\resources\application.properties                              | Java Properties |         10 |          3 |          6 |         19 |
+| c:\AlbumArchive\AlbumArchive\src\test\resources\schema.sql                                          | MS SQL          |         17 |          0 |          3 |         20 |
+| Total                                                                                               |                 |      2,909 |        285 |        614 |      3,808 |
++-----------------------------------------------------------------------------------------------------+-----------------+------------+------------+------------+------------+
