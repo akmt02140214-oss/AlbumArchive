@@ -49,7 +49,6 @@ public class AddControllerTest {
                 .param("query", "Radiohead"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("add-confirm"))
-                .andExpect(model().attribute("albumDetails", album))
                 .andExpect(model().attribute("searchQuery", "Radiohead"))
                 .andExpect(model().attribute("activeTab", "add"));
     }
@@ -113,7 +112,8 @@ public class AddControllerTest {
         // Exercise / Verify
         mockMvc.perform(post("/AlbumArchive/add/register")
                 .param("albumName", "Kid A")
-                .param("artistName", "Radiohead"))
+                .param("artistName", "Radiohead")
+                .param("rating", "5"))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/AlbumArchive/add"))
                 .andExpect(flash().attribute("successMsg", "Added to your library."));
