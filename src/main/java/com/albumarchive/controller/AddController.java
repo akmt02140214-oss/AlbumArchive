@@ -49,14 +49,24 @@ public class AddController {
             Model model) {
         List<AlbumForm> albumList = albumService.searchAlbums(artistName);
 
-        AlbumForm albumForm = null;
+        AlbumForm selected = null;
         for (AlbumForm album : albumList) {
             if (album.getAlbumName().equals(albumName)) {
-                albumForm = album;
+                selected = album;
                 break;
             }
         }
-        model.addAttribute("albumForm", albumForm);
+
+        AlbumForm formForView;
+
+        if (selected != null) {
+            formForView = selected;
+        } else {
+            formForView = new AlbumForm();
+        }
+
+        model.addAttribute("albumForm", formForView);
+        model.addAttribute("albumDetails", selected);
         model.addAttribute("searchQuery", query);
         model.addAttribute("activeTab", "add");
         return "add-confirm";
