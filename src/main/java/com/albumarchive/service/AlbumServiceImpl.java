@@ -26,10 +26,9 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public List<AlbumForm> searchAlbums(String query) {
-        List<AlbumForm> albumList = albumRepository.searchAlbums(query);
-        return albumList;
+        return albumRepository.searchAlbums(query);
     }
-    
+
     @Override
     @Transactional
     public void addAlbum(AlbumForm albumForm) {
@@ -59,9 +58,7 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public List<Album> searchMyAlbums(int offset, String sort) {
-        
-        List<Album> myAlbums = albumRepository.searchMyAlbums(offset, sort);
-        return myAlbums;
+        return albumRepository.searchMyAlbums(offset, sort);
     }
 
     @Override
@@ -71,21 +68,20 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public Album getAlbumById(Long id) {
-        Album album = albumRepository.getAlbumById(id);
-        return album;
+        return albumRepository.getAlbumById(id);
     }
 
     @Override
     public List<String> getGenresByAlbumId(Long id) {
-        List<String> genres = albumRepository.getGenresByAlbumId(id);
-        return genres;
+        return albumRepository.getGenresByAlbumId(id);
 
     }
 
     // 登録済みアルバム編集処理
     @Override
+    @Transactional
     public void updateAlbum(Long id, AlbumForm albumForm) {
-        
+
         Album album = new Album();
         album.setId(id);
         album.setRating(albumForm.getRating());
@@ -118,22 +114,18 @@ public class AlbumServiceImpl implements AlbumService {
     // 最近登録したアルバム取得機能
     @Override
     public List<Album> getRecentAlbums() {
-        List<Album> recentAlbums = albumRepository.get5AlbumsOrderByRegisterDateDesc();
-        return recentAlbums;
-        }
+        return albumRepository.get5AlbumsOrderByRegisterDateDesc();
+    }
 
     // 登録したアーティストが多い順に3つ取得
     @Override
     public List<ArtistRankingDto> getTop3Artists() {
-        List<ArtistRankingDto> top3Artists = albumRepository.getTop3Artists();
-        return top3Artists;
+        return albumRepository.getTop3Artists();
     }
 
     @Override
     public List<GenreRankingDto> getTop3Genres() {
-        List<GenreRankingDto> top3Genres = albumRepository.getTop3Genres();
-        return top3Genres;
+        return albumRepository.getTop3Genres();
     }
 
-    
 }
