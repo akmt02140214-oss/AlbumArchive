@@ -28,7 +28,7 @@ public class AlbumRepositoryImpl implements AlbumRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
-    //RestClientAPIフィールド
+    // RestClientAPIフィールド
     private final RestClient restClient;
 
     @Value("${lastfm.api.key}")
@@ -37,38 +37,38 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     @Value("${lastfm.api.url}")
     private String apiUrl;
 
-    //検索キーワードに基づいてアルバム取得
+    // 検索キーワードに基づいてアルバム取得
     @Override
     public List<AlbumForm> searchAlbums(String query) {
 
-        //APIリクエスト用URL作成
+        // APIリクエスト用URL作成
         String url = UriComponentsBuilder.fromUriString(apiUrl)
-            .queryParam("method", "artist.gettopalbums")
-            .queryParam("artist", query)
-            .queryParam("api_key", apiKey)
-            .queryParam("format", "json")
-            .toUriString();
+                .queryParam("method", "artist.gettopalbums")
+                .queryParam("artist", query)
+                .queryParam("api_key", apiKey)
+                .queryParam("format", "json")
+                .toUriString();
 
-            //Last.fm APIはたくさんのデータを取得してくるため、一度そのデータをDTOで受ける
-            //Getリクエスト送信とDTOへのマッピング
-            TopAlbumResponse response = restClient.get()
+        // Last.fm APIはたくさんのデータを取得してくるため、一度そのデータをDTOで受ける
+        // Getリクエスト送信とDTOへのマッピング
+        TopAlbumResponse response = restClient.get()
                 .uri(url)
                 .retrieve()
                 .body(TopAlbumResponse.class);
 
-        //APIからのデータを全て受け取るDTOからAlbumDtoで使用するデータだけを受ける
+        // APIからのデータを全て受け取るDTOからAlbumDtoで使用するデータだけを受ける
         List<AlbumDto> dtoList = response.getTopalbums().getAlbum();
 
-        //DTOからFormに詰め替え
+        // DTOからFormに詰め替え
         List<AlbumForm> albumList = new ArrayList<>();
 
         for (AlbumDto dto : dtoList) {
             AlbumForm album = new AlbumForm();
             album.setAlbumName(dto.getAlbumName());
             album.setArtistName(dto.getArtistName());
-            
-            //Last.fm APIは複数のアルバムジャケットサイズを返すため、解像度を選別する
-            //extralargeサイズ(300×300)を解像度に選択
+
+            // Last.fm APIは複数のアルバムジャケットサイズを返すため、解像度を選別する
+            // extralargeサイズ(300×300)を解像度に選択
             if (dto.getImage() != null && !dto.getImage().isEmpty()) {
                 for (AlbumDto.ImageDto imageDto : dto.getImage()) {
                     if ("extralarge".equals(imageDto.getSize())) {
@@ -116,9 +116,9 @@ public class AlbumRepositoryImpl implements AlbumRepository {
 
         String sql = "SELECT * FROM albums ORDER BY " + orderBy + " LIMIT 30 OFFSET ?";
 
-        //for文でEntityに詰め替えていた処理
-        List<Album> myAlbums = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Album.class), offset);
-        return myAlbums;
+        // for文でEntityに詰め替えていた処理
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Album.class), offset);
+
     }
 
     // アルバム数集計処理
@@ -127,10 +127,8 @@ public class AlbumRepositoryImpl implements AlbumRepository {
 
         String sql = "SELECT COUNT(*) FROM albums";
 
-        int totalAlbumCount = jdbcTemplate.queryForObject(sql,Integer.class);
+        return jdbcTemplate.queryForObject(sql, Integer.class);
 
-        return totalAlbumCount;
-        
     }
 
     // 登録済みアルバム取得処理
@@ -138,8 +136,8 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     public Album getAlbumById(Long id) {
         String sql = "SELECT * FROM albums WHERE id = ?";
 
-        Album album = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Album.class), id);
-        return album;
+        return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Album.class), id);
+
     }
 
     // 登録済みアルバムのジャンル取得処理
@@ -147,8 +145,8 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     public List<String> getGenresByAlbumId(Long id) {
         String sql = "SELECT genre FROM album_genres WHERE album_id = ?";
 
-        List<String> genres = jdbcTemplate.queryForList(sql, String.class, id);
-        return genres;
+        return jdbcTemplate.queryForList(sql, String.class, id);
+
     }
 
     // 登録済みアルバム編集処理
@@ -179,33 +177,28 @@ public class AlbumRepositoryImpl implements AlbumRepository {
     public List<Album> get5AlbumsOrderByRegisterDateDesc() {
         String sql = "SELECT * FROM albums ORDER BY register_date DESC, id DESC LIMIT 5";
 
-        List<Album> recentAlbums = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Album.class));
-        return recentAlbums;
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Album.class));
 
     }
 
     // 登録したアーティストが多い順に3つ取得
     @Override
     public List<ArtistRankingDto> getTop3Artists() {
-        String sql = "SELECT artist_name, COUNT(*) as count " + 
-                     "FROM albums " + "GROUP BY artist_name " +
-                     "ORDER BY count DESC, artist_name ASC " + "LIMIT 3";
+        String sql = "SELECT artist_name, COUNT(*) as count " +
+                "FROM albums " + "GROUP BY artist_name " +
+                "ORDER BY count DESC, artist_name ASC " + "LIMIT 3";
 
-                     List<ArtistRankingDto> top3Artists = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ArtistRankingDto.class));
-                     return top3Artists;
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(ArtistRankingDto.class));
 
-
-                     
     }
 
     @Override
     public List<GenreRankingDto> getTop3Genres() {
         String sql = "SELECT genre, COUNT(*) as count " +
-                     "FROM album_genres " + "GROUP BY genre " +
-                     "ORDER BY count DESC, genre ASC " +
-                     "LIMIT 3";
+                "FROM album_genres " + "GROUP BY genre " +
+                "ORDER BY count DESC, genre ASC " +
+                "LIMIT 3";
 
-                     List<GenreRankingDto> top3Genres = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(GenreRankingDto.class));
-                     return top3Genres;
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(GenreRankingDto.class));
     }
 }
