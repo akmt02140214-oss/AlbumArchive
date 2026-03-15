@@ -73,7 +73,7 @@ public class AddControllerTest {
                 .param("albumName", "OK Computer")
                 .param("query", "Radiohead"))
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("albumDetails", album2));
+                .andExpect(model().attribute("albumForm", album2));
     }
 
     @Test
@@ -92,7 +92,7 @@ public class AddControllerTest {
                 .param("albumName", "In Rainbows")
                 .param("query", "Radiohead"))
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("albumDetails", (Object) null));
+                .andExpect(model().attributeExists("albumForm"));
 
     }
 
