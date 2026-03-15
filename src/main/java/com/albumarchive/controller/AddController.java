@@ -66,7 +66,6 @@ public class AddController {
         }
 
         model.addAttribute("albumForm", formForView);
-        model.addAttribute("albumDetails", selected);
         model.addAttribute("searchQuery", query);
         model.addAttribute("activeTab", "add");
         return "add-confirm";
