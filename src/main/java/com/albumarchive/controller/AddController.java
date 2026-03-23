@@ -23,10 +23,15 @@ public class AddController {
 
     private final AlbumService albumService;
 
+    // アクティブタブのメソッド(共通)
+    @ModelAttribute("activeTab")
+    public String activeTab() {
+        return "add";
+    }
+
     // アルバム追加画面表示
     @GetMapping("/AlbumArchive/add")
-    public String showAddPage(Model model) {
-        model.addAttribute("activeTab", "add");
+    public String showAddPage() {
         return "add";
     }
 
@@ -36,7 +41,6 @@ public class AddController {
         List<AlbumForm> albumList = albumService.searchAlbums(query);
         model.addAttribute("albums", albumList);
         model.addAttribute("searchQuery", query);
-        model.addAttribute("activeTab", "add");
         return "add";
     }
 
@@ -67,7 +71,6 @@ public class AddController {
 
         model.addAttribute("albumForm", formForView);
         model.addAttribute("searchQuery", query);
-        model.addAttribute("activeTab", "add");
         return "add-confirm";
     }
 
@@ -78,7 +81,6 @@ public class AddController {
 
         if (br.hasErrors()) {
             model.addAttribute("albumForm", albumForm);
-            model.addAttribute("activeTab", "add");
             return "add-confirm";
 
         }
