@@ -56,6 +56,11 @@ public class AlbumRepositoryImpl implements AlbumRepository {
                 .retrieve()
                 .body(TopAlbumResponse.class);
 
+        // Nullの時は空のリストを返す
+        if (response == null || response.getTopalbums() == null || response.getTopalbums().getAlbum() == null) {
+            return List.of();
+        }
+
         // APIからのデータを全て受け取るDTOからAlbumDtoで使用するデータだけを受ける
         List<AlbumDto> dtoList = response.getTopalbums().getAlbum();
 
