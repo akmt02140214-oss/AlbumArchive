@@ -61,15 +61,7 @@ public class AddController {
             }
         }
 
-        AlbumForm formForView;
-
-        if (selected != null) {
-            formForView = selected;
-        } else {
-            formForView = new AlbumForm();
-        }
-
-        model.addAttribute("albumForm", formForView);
+        model.addAttribute("albumForm", selected != null ? selected : new AlbumForm());
         model.addAttribute("searchQuery", query);
         return "add-confirm";
     }
