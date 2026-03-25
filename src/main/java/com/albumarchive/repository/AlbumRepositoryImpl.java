@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.albumarchive.dto.AlbumDto;
@@ -51,10 +52,15 @@ public class AlbumRepositoryImpl implements AlbumRepository {
 
         // Last.fm APIはたくさんのデータを取得してくるため、一度そのデータをDTOで受ける
         // Getリクエスト送信とDTOへのマッピング
-        TopAlbumResponse response = restClient.get()
-                .uri(url)
-                .retrieve()
-                .body(TopAlbumResponse.class);
+        TopAlbumResponse response;
+        try {
+            response = restClient.get()
+                    .uri(url)
+                    .retrieve()
+                    .body(TopAlbumResponse.class);
+        } catch (RestClientException e) {
+            return List.of();
+        }
 
         // Nullの時は空のリストを返す
         if (response == null || response.getTopalbums() == null || response.getTopalbums().getAlbum() == null) {
