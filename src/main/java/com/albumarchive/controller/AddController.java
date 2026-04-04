@@ -1,6 +1,7 @@
 package com.albumarchive.controller;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,7 +56,7 @@ public class AddController {
 
         AlbumForm selected = null;
         for (AlbumForm album : albumList) {
-            if (album.getAlbumName().equals(albumName)) {
+            if (Objects.equals(album.getAlbumName(), albumName)) {
                 selected = album;
                 break;
             }

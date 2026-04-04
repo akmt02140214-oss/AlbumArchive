@@ -12,4 +12,4 @@ services:
       MYSQL_PASSWORD: user_password
     volumes:
       - ./mysql_data:/var/lib/mysql
-      - ./mysql://etc/mysql/conf.d:ro
+      - ./mysql:/etc/mysql/conf.d:ro
