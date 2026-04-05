@@ -122,6 +122,22 @@ public class AddControllerTest {
     }
 
     @Test
+    void testShowAddPageRedirect_バリデーションエラーがある場合は確認画面表示() throws Exception {
+
+        // Exercise / Verify
+        mockMvc.perform(post("/AlbumArchive/add/register")
+                .param("albumName", "Kid A")
+                .param("artistName", "Radiohead")
+                .param("rating", ""))
+                .andExpect(status().isOk())
+                .andExpect(view().name("add-confirm"))
+                .andExpect(model().hasErrors())
+                .andExpect(model().attributeExists("albumForm"));
+
+        verify(albumService, times(0)).addAlbum(any(AlbumForm.class));
+    }
+
+    @Test
     void testShowSearchResultPage_検索結果画面表示() throws Exception {
         AlbumForm album = new AlbumForm();
         album.setAlbumName("Kid A");
