@@ -437,6 +437,24 @@ public class AlbumRepositoryImplTest {
     }
 
     @Test
+    void testSearchAlbums_topalbumsがnullの場合nullのlistを返す() {
+
+        // Setup
+        TopAlbumResponse mock = new TopAlbumResponse();
+
+        org.mockito.Mockito.when(restClient.get()
+                .uri(org.mockito.ArgumentMatchers.anyString())
+                .retrieve()
+                .body(TopAlbumResponse.class)).thenReturn(mock);
+
+        // Exercise
+        List<AlbumForm> result = albumRepository.searchAlbums("Radiohead");
+
+        // Verify
+        assertThat(result.size(), is(0));
+    }
+
+    @Test
     void testSearchMyAlbums_登録日の降順でソートする() {
 
         // Setup
